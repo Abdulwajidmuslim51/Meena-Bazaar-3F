@@ -1,402 +1,337 @@
 <!DOCTYPE html>
 <html lang="ur" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#2563eb">
-  <title>Meena Bazaar 3F</title>
-
-  <style>
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Arial,sans-serif;background:#f3f4f6;color:#111}
-    header{background:#2563eb;color:white;padding:18px;text-align:center}
-    header h1{margin:0;font-size:25px}
-    .container{max-width:700px;margin:auto;padding:15px}
-    .search{width:100%;padding:14px;border:1px solid #ddd;border-radius:10px;font-size:16px;margin-bottom:12px}
-    .categories{display:flex;gap:8px;overflow:auto;margin-bottom:15px}
-    .cat{border:0;background:white;padding:10px 15px;border-radius:20px;white-space:nowrap}
-    .cat.active{background:#2563eb;color:white}
-    .card{background:white;border-radius:14px;padding:15px;margin-bottom:12px;box-shadow:0 2px 8px #0001}
-    .card h3{margin:0 0 8px}
-    .price{font-size:20px;font-weight:bold;color:#2563eb}
-    .city{color:#666;margin:7px 0}
-    button{border:0;border-radius:9px;padding:11px 15px;cursor:pointer}
-    .primary{background:#2563eb;color:white}
-    .green{background:#16a34a;color:white}
-    .dark{background:#111827;color:white}
-    .actions{display:flex;gap:8px;margin-top:12px}
-    .actions button{flex:1}
-    .form{background:white;padding:18px;border-radius:14px;margin-top:15px}
-    .form input,.form textarea,.form select{width:100%;padding:12px;margin:7px 0;border:1px solid #ddd;border-radius:9px;font-size:15px}
-    .hidden{display:none}
-    .top-buttons{display:flex;gap:8px;justify-content:center;margin-top:12px}
-    .empty{text-align:center;padding:30px;color:#777}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meena Bazaar 3F</title>
+<style>
+body{margin:0;font-family:Arial;background:#f3f4f6;color:#111}
+header{background:#2563eb;color:white;text-align:center;padding:20px}
+.container{max-width:700px;margin:auto;padding:15px}
+input,textarea,select{width:100%;padding:13px;margin:7px 0;border:1px solid #ddd;border-radius:9px;box-sizing:border-box}
+button{padding:12px 18px;border:0;border-radius:9px;margin:5px;cursor:pointer}
+.blue{background:#2563eb;color:white}
+.green{background:#16a34a;color:white}
+.dark{background:#111827;color:white}
+.card{background:white;padding:15px;margin:12px 0;border-radius:12px;box-shadow:0 2px 8px #0002}
+.price{font-size:20px;font-weight:bold;color:#2563eb}
+.hidden{display:none}
+.categories{display:flex;overflow:auto;gap:5px}
+</style>
 </head>
 
 <body>
 
 <header>
-  <h1>🛍️ Meena Bazaar 3F</h1>
-  <p>پرانے اور استعمال شدہ اشیاء کی خرید و فروخت</p>
+<h1>🛍️ Meena Bazaar 3F</h1>
+<p>پرانے اور استعمال شدہ اشیاء کی خرید و فروخت</p>
 
-  <div class="top-buttons">
-    <button class="primary" onclick="showForm()">＋ اشتہار لگائیں</button>
-    <button class="dark" onclick="login()">👤 Login</button>
-  </div>
+<button class="blue" onclick="login()">👤 Login</button>
+<button class="dark" onclick="showForm()">＋ اشتہار لگائیں</button>
 </header>
 
 <div class="container">
 
-  <input id="search" class="search"
-         placeholder="🔍 چیز تلاش کریں..."
-         oninput="loadAds()">
+<input id="search" placeholder="🔍 چیز تلاش کریں..." oninput="loadAds()">
 
-  <div class="categories">
-    <button class="cat active" onclick="setCategory('تمام',this)">تمام</button>
-    <button class="cat" onclick="setCategory('موبائل',this)">📱 موبائل</button>
-    <button class="cat" onclick="setCategory('گاڑی',this)">🚗 گاڑی</button>
-    <button class="cat" onclick="setCategory('فرنیچر',this)">🛋️ فرنیچر</button>
-    <button class="cat" onclick="setCategory('الیکٹرانکس',this)">💻 الیکٹرانکس</button>
-    <button class="cat" onclick="setCategory('دیگر',this)">📦 دیگر</button>
-  </div>
+<div class="categories">
+<button onclick="setCategory('تمام')">تمام</button>
+<button onclick="setCategory('موبائل')">📱 موبائل</button>
+<button onclick="setCategory('گاڑی')">🚗 گاڑی</button>
+<button onclick="setCategory('فرنیچر')">🛋️ فرنیچر</button>
+<button onclick="setCategory('الیکٹرانکس')">💻 الیکٹرانکس</button>
+<button onclick="setCategory('دیگر')">📦 دیگر</button>
+</div>
 
-  <div id="form" class="form hidden">
-    <h2>نیا اشتہار</h2>
+<div id="form" class="hidden">
+<h2>نیا اشتہار</h2>
 
-    <input id="title" placeholder="چیز کا نام">
-    
-    <input id="price" type="number" placeholder="قیمت">
+<input id="title" placeholder="چیز کا نام">
+<input id="price" type="number" placeholder="قیمت">
+<input id="city" placeholder="شہر">
 
-    <input id="city" placeholder="شہر">
+<select id="category">
+<option>موبائل</option>
+<option>گاڑی</option>
+<option>فرنیچر</option>
+<option>الیکٹرانکس</option>
+<option>دیگر</option>
+</select>
 
-    <select id="category">
-      <option value="موبائل">📱 موبائل</option>
-      <option value="گاڑی">🚗 گاڑی</option>
-      <option value="فرنیچر">🛋️ فرنیچر</option>
-      <option value="الیکٹرانکس">💻 الیکٹرانکس</option>
-      <option value="دیگر">📦 دیگر</option>
-    </select>
+<textarea id="description" placeholder="چیز کی تفصیل"></textarea>
+<input id="phone" placeholder="موبائل نمبر">
 
-    <textarea id="description"
-              rows="4"
-              placeholder="تفصیل"></textarea>
+<button class="blue" onclick="addAd()">اشتہار محفوظ کریں</button>
+</div>
 
-    <input id="phone"
-           placeholder="موبائل نمبر (مثلاً 03001234567)">
-
-    <button class="primary" onclick="addAd()">اشتہار محفوظ کریں</button>
-    <button onclick="hideForm()">منسوخ</button>
-  </div>
-
-  <div id="ads">
-    <div class="empty">اشتہارات لوڈ ہو رہے ہیں...</div>
-  </div>
+<h2>تازہ اشتہارات</h2>
+<div id="ads">لوڈ ہو رہا ہے...</div>
 
 </div>
 
 <script type="module">
 
-  import { initializeApp } from
-  "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {initializeApp}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-  import {
-    getFirestore,
-    collection,
-    addDoc,
-    getDocs,
-    serverTimestamp
-  } from
-  "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {
+getFirestore,
+collection,
+addDoc,
+getDocs,
+serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-  import {
-  getAuth,
-  signInWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {
+getAuth,
+signInWithEmailAndPassword,
+onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyA-E7avzWjS9WLRMq6cgR2XA0f3urfsd4Q",
-    authDomain: "meena-bazaar-3f.firebaseapp.com",
-    projectId: "meena-bazaar-3f",
-    storageBucket: "meena-bazaar-3f.firebasestorage.app",
-    messagingSenderId: "95538058106",
-    appId: "1:95538058106:web:c42bf08d9d092b3382fcc3"
-  };
+const firebaseConfig = {
+apiKey:"AIzaSyA-E7avzWjS9WLRMq6cgR2XA0f3urfsd4Q",
+authDomain:"meena-bazaar-3f.firebaseapp.com",
+projectId:"meena-bazaar-3f",
+storageBucket:"meena-bazaar-3f.firebasestorage.app",
+messagingSenderId:"95538058106",
+appId:"1:95538058106:web:c42bf08d9d092b3382fcc3"
+};
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  const auth = getAuth(app);
+const app=initializeApp(firebaseConfig);
+const db=getFirestore(app);
+const auth=getAuth(app);
 
-  let selectedCategory = "تمام";
+let category="تمام";
+let currentUser=null;
 
-  window.showForm = function(){
-    document.getElementById("form").classList.remove("hidden");
-    window.scrollTo(0, document.body.scrollHeight);
-  }
 
-  window.hideForm = function(){
-    document.getElementById("form").classList.add("hidden");
-  }
+onAuthStateChanged(auth,user=>{
+currentUser=user;
 
-  window.setCategory = function(category, button){
-    selectedCategory = category;
+if(user){
+alert("Login کامیاب ہوگیا!");
+}
 
-    document.querySelectorAll(".cat")
-      .forEach(x => x.classList.remove("active"));
+loadAds();
+});
 
-    button.classList.add("active");
 
-    loadAds();
-  }
+window.login=async function(){
 
-  window.login = async function(){
+const email=prompt("اپنا Email لکھیں:");
+if(!email)return;
 
-  const email = prompt("اپنا Email لکھیں:");
-  if (!email) return;
+const password=prompt("اپنا Password لکھیں:");
+if(!password)return;
 
-  const password = prompt("اپنا Password لکھیں:");
-  if (!password) return;
+try{
 
-  try {
+await signInWithEmailAndPassword(
+auth,
+email,
+password
+);
 
-    await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+}catch(error){
 
-    alert("Login کامیاب ہوگیا! اب آپ اشتہار لگا سکتے ہیں۔");
+alert("Login نہیں ہوا: "+error.message);
 
-  } catch(error) {
+}
 
-    alert("Login میں مسئلہ: " + error.message);
+};
 
-  }
-  }
 
-      const provider = new GoogleAuthProvider();
+window.showForm=function(){
 
-      await signInWithPopup(auth, provider);
+if(!currentUser){
 
-      alert("Login کامیاب ہوگیا!");
+alert("پہلے Login کریں، پھر اشتہار لگائیں۔");
+return;
 
-    }catch(error){
+}
 
-      alert("Login میں مسئلہ: " + error.message);
+document.getElementById("form").classList.remove("hidden");
 
-    }
+};
 
-  }
 
-  window.addAd = async function(){
+window.setCategory=function(c){
 
-    const title =
-      document.getElementById("title").value.trim();
+category=c;
+loadAds();
 
-    const price =
-      document.getElementById("price").value;
+};
 
-    const city =
-      document.getElementById("city").value.trim();
 
-    const category =
-      document.getElementById("category").value;
+window.addAd=async function(){
 
-    const description =
-      document.getElementById("description").value.trim();
+if(!currentUser){
 
-    const phone =
-      document.getElementById("phone").value.trim();
+alert("پہلے Login کریں۔");
+return;
 
+}
 
-    if(!title || !price || !city || !phone){
+const title=document.getElementById("title").value.trim();
+const price=document.getElementById("price").value;
+const city=document.getElementById("city").value.trim();
+const cat=document.getElementById("category").value;
+const description=document.getElementById("description").value.trim();
+const phone=document.getElementById("phone").value.trim();
 
-      alert("نام، قیمت، شہر اور موبائل نمبر لازمی ہیں۔");
-      return;
+if(!title||!price||!city||!phone){
 
-    }
+alert("نام، قیمت، شہر اور موبائل نمبر لازمی ہیں۔");
+return;
 
+}
 
-    try{
+try{
 
-      await addDoc(collection(db,"ads"),{
+await addDoc(collection(db,"ads"),{
 
-        title:title,
-        price:Number(price),
-        city:city,
-        category:category,
-        description:description,
-        phone:phone,
-        featured:false,
-        approved:false,
-        createdAt:serverTimestamp()
+title:title,
+price:Number(price),
+city:city,
+category:cat,
+description:description,
+phone:phone,
 
-      });
+/* ابھی testing کے لیے true */
+approved:true,
 
-      alert("اشتہار جمع ہوگیا۔ Admin approval کے بعد دکھایا جائے گا۔");
+featured:false,
+userId:currentUser.uid,
+createdAt:serverTimestamp()
 
-      document.getElementById("title").value="";
-      document.getElementById("price").value="";
-      document.getElementById("city").value="";
-      document.getElementById("description").value="";
-      document.getElementById("phone").value="";
+});
 
-      hideForm();
+alert("🎉 اشتہار کامیابی سے محفوظ ہوگیا!");
 
-      loadAds();
+document.getElementById("title").value="";
+document.getElementById("price").value="";
+document.getElementById("city").value="";
+document.getElementById("description").value="";
+document.getElementById("phone").value="";
 
-    }catch(error){
+document.getElementById("form").classList.add("hidden");
 
-      alert("اشتہار محفوظ نہیں ہوا: " + error.message);
+loadAds();
 
-    }
+}catch(error){
 
-  }
+alert("اشتہار محفوظ نہیں ہوا: "+error.message);
 
+}
 
-  window.loadAds = async function(){
+};
 
-    const box = document.getElementById("ads");
 
-    const search =
-      document.getElementById("search").value.toLowerCase();
+window.loadAds=async function(){
 
-    box.innerHTML =
-      '<div class="empty">لوڈ ہو رہا ہے...</div>';
+const box=document.getElementById("ads");
 
+try{
 
-    try{
+const snapshot=await getDocs(collection(db,"ads"));
 
-      const snapshot =
-        await getDocs(collection(db,"ads"));
+const search=
+document.getElementById("search").value.toLowerCase();
 
-      let results=[];
+box.innerHTML="";
 
+let count=0;
 
-      snapshot.forEach(doc => {
+snapshot.forEach(doc=>{
 
-        const ad=doc.data();
+const ad=doc.data();
 
-        if(ad.approved === true){
+const text=
+(ad.title||"")+" "+
+(ad.city||"")+" "+
+(ad.description||"");
 
-          const text =
-            ((ad.title || "") + " " +
-             (ad.description || "") + " " +
-             (ad.city || "")).toLowerCase();
+const matchSearch=
+text.toLowerCase().includes(search);
 
-          const categoryOK =
-            selectedCategory === "تمام" ||
-            ad.category === selectedCategory;
+const matchCategory=
+category==="تمام"||ad.category===category;
 
-          const searchOK =
-            !search || text.includes(search);
+if(ad.approved===true&&matchSearch&&matchCategory){
 
-          if(categoryOK && searchOK){
+count++;
 
-            results.push(ad);
+const wa=
+"https://wa.me/92"+
+(ad.phone||"").replace(/^0/,"");
 
-          }
+box.innerHTML+=`
 
-        }
+<div class="card">
 
-      });
+<h3>${safe(ad.title)}</h3>
 
+<div class="price">
+Rs. ${Number(ad.price).toLocaleString()}
+</div>
 
-      if(results.length===0){
+<p>📍 ${safe(ad.city)}</p>
 
-        box.innerHTML =
-          '<div class="empty">ابھی کوئی منظور شدہ اشتہار موجود نہیں۔</div>';
+<p>${safe(ad.description||"")}</p>
 
-        return;
+<div>
 
-      }
+<a href="tel:${ad.phone}">
+<button class="blue">📞 Call</button>
+</a>
 
+<a href="${wa}" target="_blank">
+<button class="green">💬 WhatsApp</button>
+</a>
 
-      box.innerHTML="";
+</div>
 
+</div>
 
-      results.forEach(ad => {
+`;
 
-        const card=document.createElement("div");
+}
 
-        card.className="card";
+});
 
-        const whatsapp =
-          "https://wa.me/92" +
-          ad.phone.replace(/^0/,"") +
-          "?text=" +
-          encodeURIComponent(
-            "السلام علیکم، میں آپ کے Meena Bazaar 3F والے اشتہار کے بارے میں رابطہ کر رہا ہوں۔"
-          );
+if(count===0){
 
+box.innerHTML="<p>ابھی کوئی اشتہار موجود نہیں۔</p>";
 
-        card.innerHTML=`
+}
 
-          <h3>${escapeHTML(ad.title)}</h3>
+}catch(error){
 
-          <div class="price">
-            Rs. ${Number(ad.price).toLocaleString()}
-          </div>
+console.log(error);
 
-          <div class="city">
-            📍 ${escapeHTML(ad.city)}
-          </div>
+box.innerHTML=
+"<p>اشتہارات لوڈ نہیں ہو سکے۔</p>";
 
-          <p>
-            ${escapeHTML(ad.description || "")}
-          </p>
+}
 
-          <div class="actions">
+};
 
-            <a href="tel:${ad.phone}" style="flex:1">
-              <button class="primary" style="width:100%">
-                📞 Call
-              </button>
-            </a>
 
-            <a href="${whatsapp}"
-               target="_blank"
-               style="flex:1">
-              <button class="green" style="width:100%">
-                💬 WhatsApp
-              </button>
-            </a>
+function safe(value){
 
-          </div>
+return String(value)
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
 
-        `;
+}
 
-        box.appendChild(card);
-
-      });
-
-
-    }catch(error){
-
-      box.innerHTML =
-        '<div class="empty">Database سے رابطہ نہیں ہو سکا۔</div>';
-
-      console.error(error);
-
-    }
-
-  }
-
-
-  function escapeHTML(text){
-
-    return String(text)
-      .replaceAll("&","&amp;")
-      .replaceAll("<","&lt;")
-      .replaceAll(">","&gt;")
-      .replaceAll('"',"&quot;")
-      .replaceAll("'","&#039;");
-
-  }
-
-
-  loadAds();
+loadAds();
 
 </script>
 
