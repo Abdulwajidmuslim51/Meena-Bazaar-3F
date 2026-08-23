@@ -1,0 +1,10 @@
+{
+  "name": "Meena Bazaar 3F",
+  "short_name": "Meena Bazaar",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f5f6f8",
+  "theme_color": "#08285c",
+  "orientation": "portrait",
+  "description": "پاکستان کا آسان second-hand خرید و فروخت marketplace"
+}
