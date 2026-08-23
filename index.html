@@ -20,7 +20,7 @@ body{
 
 header{
   background:linear-gradient(135deg,#2563eb,#1d4ed8);
-  color:white;
+  color:#fff;
   padding:22px 15px;
   text-align:center;
 }
@@ -31,20 +31,22 @@ header h1{
 }
 
 .container{
-  max-width:900px;
+  max-width:950px;
   margin:auto;
   padding:15px;
 }
 
 .card{
-  background:white;
+  background:#fff;
   border-radius:15px;
   padding:16px;
   margin:15px 0;
   box-shadow:0 3px 12px rgba(0,0,0,.08);
 }
 
-input,textarea,select{
+input,
+textarea,
+select{
   width:100%;
   padding:13px;
   margin:7px 0;
@@ -69,27 +71,27 @@ button{
 
 .btn-blue{
   background:#2563eb;
-  color:white;
+  color:#fff;
 }
 
 .btn-green{
   background:#16a34a;
-  color:white;
+  color:#fff;
 }
 
 .btn-red{
   background:#dc2626;
-  color:white;
+  color:#fff;
 }
 
 .btn-dark{
   background:#111827;
-  color:white;
+  color:#fff;
 }
 
 .btn-orange{
   background:#ea580c;
-  color:white;
+  color:#fff;
 }
 
 .btn-gray{
@@ -99,6 +101,10 @@ button{
 
 .hidden{
   display:none!important;
+}
+
+.center{
+  text-align:center;
 }
 
 .search{
@@ -137,37 +143,10 @@ button{
 .featured-label{
   display:inline-block;
   background:#f59e0b;
-  color:white;
+  color:#fff;
   padding:5px 10px;
   border-radius:20px;
   margin-bottom:8px;
-}
-
-.status{
-  padding:7px 10px;
-  border-radius:8px;
-  display:inline-block;
-  margin:5px 0;
-  font-size:13px;
-}
-
-.pending{
-  background:#fef3c7;
-  color:#92400e;
-}
-
-.approved{
-  background:#dcfce7;
-  color:#166534;
-}
-
-.rejected{
-  background:#fee2e2;
-  color:#991b1b;
-}
-
-.admin-card{
-  border-right:5px solid #2563eb;
 }
 
 .row{
@@ -186,14 +165,26 @@ button{
   color:#64748b;
 }
 
-.center{
-  text-align:center;
+.admin-card{
+  border-right:5px solid #2563eb;
+}
+
+.stat{
+  display:inline-block;
+  background:#f8fafc;
+  padding:12px;
+  border-radius:10px;
+  margin:4px;
 }
 
 hr{
   border:0;
   border-top:1px solid #e5e7eb;
   margin:15px 0;
+}
+
+a{
+  text-decoration:none;
 }
 </style>
 </head>
@@ -296,10 +287,10 @@ oninput="loadAds()"
 
 <div id="adForm" class="card hidden">
 
-<h2>📢 نیا اشتہار</h2>
+<h2>📢 نیا اشتہار لگائیں</h2>
 
 <p class="small">
-فی الحال اشتہار لگانا مفت ہے۔
+فی الحال ہر اشتہار مفت ہے۔
 </p>
 
 <input
@@ -310,6 +301,7 @@ placeholder="چیز کا نام *"
 <input
 id="price"
 type="number"
+min="0"
 placeholder="قیمت *"
 >
 
@@ -337,7 +329,7 @@ placeholder="چیز کی مکمل تفصیل *"
 
 <input
 id="phone"
-placeholder="موبائل نمبر *"
+placeholder="موبائل / WhatsApp نمبر *"
 >
 
 <input
@@ -346,16 +338,12 @@ placeholder="تصویر کا URL (فی الحال)"
 >
 
 <p class="small">
-📸 ابھی Firebase Storage فعال نہیں ہے، اس لیے فی الحال تصویر کا URL استعمال کریں۔
+📸 Firebase Storage ابھی فعال نہیں، اس لیے فی الحال تصویر کا URL استعمال کریں۔
 </p>
 
 <div class="card">
 
-<h3>💰 Advertisement Fee</h3>
-
-<p id="feeText">
-فی الحال: Free
-</p>
+<h3>⭐ اشتہار کی قسم</h3>
 
 <select id="adPlan">
 
@@ -364,13 +352,13 @@ Free Advertisement — Rs. 0
 </option>
 
 <option value="featured">
-Featured Advertisement — فی الحال Free
+Featured Advertisement — ابھی Free
 </option>
 
 </select>
 
 <p class="small">
-Payment system بعد میں فعال کیا جا سکتا ہے۔
+ابھی payment نہیں لی جا رہی۔ بعد میں paid advertisement فعال کیا جا سکتا ہے۔
 </p>
 
 </div>
@@ -379,7 +367,7 @@ Payment system بعد میں فعال کیا جا سکتا ہے۔
 class="btn-blue"
 onclick="addAd()"
 >
-📢 اشتہار جمع کریں
+📢 اشتہار Publish کریں
 </button>
 
 <button
@@ -391,8 +379,6 @@ Cancel
 
 </div>
 
-
-<!-- OPEN AD FORM -->
 
 <div class="center">
 
@@ -406,7 +392,7 @@ onclick="showAdForm()"
 </div>
 
 
-<!-- ADS -->
+<!-- PUBLIC ADS -->
 
 <h2>🔥 تازہ اشتہارات</h2>
 
@@ -415,9 +401,12 @@ onclick="showAdForm()"
 </div>
 
 
-<!-- ADMIN -->
+<!-- ADMIN PANEL -->
 
-<div id="adminPanel" class="card hidden admin-card">
+<div
+id="adminPanel"
+class="card hidden admin-card"
+>
 
 <h2>🛡️ Admin Panel</h2>
 
@@ -433,7 +422,7 @@ muslimabdulwajid51@gmail.com
 <div id="adminStats"></div>
 
 <div id="adminAds">
-Admin data loading...
+Loading...
 </div>
 
 </div>
@@ -446,7 +435,7 @@ Admin data loading...
 
 
 /* =========================
-   FIREBASE IMPORTS
+   FIREBASE
 ========================= */
 
 import {
@@ -454,7 +443,6 @@ initializeApp
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
 
 import {
 getFirestore,
@@ -468,7 +456,6 @@ serverTimestamp
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
 
 import {
 getAuth,
@@ -526,13 +513,7 @@ const ADMIN_EMAIL =
 "muslimabdulwajid51@gmail.com";
 
 /*
-   ابھی Advertisement Free ہے۔
-
-   بعد میں یہاں:
-   100
-   یا
-   200
-   وغیرہ کر سکتے ہیں۔
+  ابھی Free:
 */
 
 const AD_FEE = 0;
@@ -569,14 +550,10 @@ document
 
 document
 .getElementById("userEmail")
-textContent =
+.textContent =
 user.email;
 
-if(
-user.email.toLowerCase()
-===
-ADMIN_EMAIL.toLowerCase()
-){
+if(isAdmin()){
 
 document
 .getElementById("adminButton")
@@ -615,22 +592,24 @@ loadAds();
    LOGIN
 ========================= */
 
-window.login = async function(){
+window.login =
+async function(){
 
 const email =
 prompt("اپنا Email لکھیں:");
 
-if(!email) return;
+if(!email)
+return;
 
 const password =
 prompt("اپنا Password لکھیں:");
 
-if(!password) return;
+if(!password)
+return;
 
 try{
 
-await
-signInWithEmailAndPassword(
+await signInWithEmailAndPassword(
 auth,
 email,
 password
@@ -656,31 +635,33 @@ error.message
    REGISTER
 ========================= */
 
-window.registerUser = async function(){
+window.registerUser =
+async function(){
 
 const email =
 prompt("نیا Email لکھیں:");
 
-if(!email) return;
+if(!email)
+return;
 
 const password =
 prompt(
 "نیا Password لکھیں:\nکم از کم 6 حروف"
 );
 
-if(!password) return;
+if(!password)
+return;
 
 try{
 
-await
-createUserWithEmailAndPassword(
+await createUserWithEmailAndPassword(
 auth,
 email,
 password
 );
 
 alert(
-"🎉 Account بن گیا!"
+"🎉 Account کامیابی سے بن گیا!"
 );
 
 }catch(error){
@@ -699,11 +680,20 @@ error.message
    LOGOUT
 ========================= */
 
-window.logout = async function(){
+window.logout =
+async function(){
+
+try{
 
 await signOut(auth);
 
 alert("Logout ہوگیا۔");
+
+}catch(error){
+
+alert(error.message);
+
+}
 
 };
 
@@ -712,12 +702,13 @@ alert("Logout ہوگیا۔");
    SHOW FORM
 ========================= */
 
-window.showAdForm = function(){
+window.showAdForm =
+function(){
 
 if(!currentUser){
 
 alert(
-"پہلے Login کریں۔"
+"⚠️ اشتہار لگانے کے لیے پہلے Login کریں۔"
 );
 
 return;
@@ -736,7 +727,8 @@ behavior:"smooth"
 };
 
 
-window.hideAdForm = function(){
+window.hideAdForm =
+function(){
 
 document
 .getElementById("adForm")
@@ -764,7 +756,8 @@ loadAds();
    ADD AD
 ========================= */
 
-window.addAd = async function(){
+window.addAd =
+async function(){
 
 if(!currentUser){
 
@@ -820,7 +813,7 @@ document
 
 if(
 !title ||
-!price ||
+price === "" ||
 !city ||
 !description ||
 !phone
@@ -835,20 +828,7 @@ return;
 }
 
 
-/*
-   ابھی payment نہیں لی جا رہی۔
-*/
-
-const paymentStatus =
-AD_FEE === 0
-?
-"free"
-:
-"pending";
-
-
 try{
-
 
 await addDoc(
 collection(db,"ads"),
@@ -874,15 +854,20 @@ userEmail:currentUser.email,
 
 plan:adPlan,
 
-adFee:AD_FEE,
-
-paymentStatus:paymentStatus,
-
 /*
-   عام اشتہار پہلے Admin approval کا منتظر ہوگا۔
+  ابھی ہر advertisement Free ہے۔
 */
 
-approved:false,
+adFee:AD_FEE,
+
+paymentStatus:"free",
+
+/*
+  IMPORTANT:
+  ہر نیا اشتہار فوراً live ہوگا۔
+*/
+
+approved:true,
 
 rejected:false,
 
@@ -897,11 +882,11 @@ serverTimestamp()
 
 
 alert(
-"✅ اشتہار جمع ہوگیا!\n\nAdmin approval کے بعد یہ public ہوگا۔"
+"🎉 آپ کا اشتہار فوراً Publish ہوگیا!"
 );
 
 
-/* CLEAR FORM */
+/* CLEAR */
 
 document
 .getElementById("title")
@@ -950,7 +935,7 @@ error.message
 
 
 /* =========================
-   LOAD PUBLIC ADS
+   LOAD ADS
 ========================= */
 
 window.loadAds =
@@ -970,7 +955,6 @@ await getDocs(
 collection(db,"ads")
 );
 
-
 const search =
 document
 .getElementById("search")
@@ -979,14 +963,18 @@ document
 .trim();
 
 
-let ads = [];
+let ads=[];
 
 
 snapshot.forEach(
-item => {
+item=>{
 
-const ad =
-item.data();
+const ad=item.data();
+
+
+/*
+  صرف live ads
+*/
 
 if(
 ad.approved === true &&
@@ -1005,13 +993,16 @@ const searchable =
 )
 .toLowerCase();
 
+
 const searchMatch =
 !search ||
 searchable.includes(search);
 
+
 const categoryMatch =
-selectedCategory === "تمام" ||
-ad.category === selectedCategory;
+selectedCategory==="تمام" ||
+ad.category===selectedCategory;
+
 
 if(
 searchMatch &&
@@ -1031,7 +1022,7 @@ id:item.id,
 
 
 /*
-   Featured پہلے
+ Featured پہلے
 */
 
 ads.sort(
@@ -1041,13 +1032,18 @@ Number(a.featured)
 );
 
 
-if(ads.length === 0){
+if(ads.length===0){
 
-box.innerHTML =
+box.innerHTML=
 `
 <div class="card center">
-<h3>📭 کوئی اشتہار نہیں ملا</h3>
-<p>پہلا اشتہار آپ لگا سکتے ہیں۔</p>
+
+<h3>📭 ابھی کوئی اشتہار نہیں</h3>
+
+<p>
+آپ پہلا اشتہار لگا سکتے ہیں۔
+</p>
+
 </div>
 `;
 
@@ -1056,29 +1052,28 @@ return;
 }
 
 
-box.innerHTML = "";
+box.innerHTML="";
 
 
-ads.forEach(ad => {
+ads.forEach(
+ad=>{
 
-let image = "";
-
-if(ad.imageUrl){
-
-image =
+const image =
+ad.imageUrl
+?
 `
 <img
 class="ad-image"
 src="${safe(ad.imageUrl)}"
 onerror="this.style.display='none'"
 >
-`;
-
-}
+`
+:
+"";
 
 
 const featured =
-ad.featured === true;
+ad.featured===true;
 
 
 const whatsapp =
@@ -1088,12 +1083,14 @@ makeWhatsApp(ad.phone);
 box.innerHTML +=
 `
 
-<div class="card ${featured ? "featured":""}">
+<div class="card ${featured?"featured":""}">
 
-${featured ?
-`<span class="featured-label">
+${featured?
+`
+<span class="featured-label">
 ⭐ Featured
-</span>`
+</span>
+`
 :
 ""}
 
@@ -1125,39 +1122,50 @@ ${safe(ad.description)}
 
 <div class="row">
 
-<a
-href="tel:${safe(ad.phone)}"
->
+<a href="tel:${safe(ad.phone)}">
+
 <button class="btn-blue">
 📞 Call
 </button>
+
 </a>
 
 <a
 href="${whatsapp}"
 target="_blank"
+rel="noopener"
 >
+
 <button class="btn-green">
 💬 WhatsApp
 </button>
+
 </a>
 
 </div>
 
 </div>
+
 `;
 
 });
+
 
 
 }catch(error){
 
 console.error(error);
 
-box.innerHTML =
+box.innerHTML=
 `
 <div class="card">
-❌ اشتہارات لوڈ نہیں ہو سکے۔
+
+❌ اشتہارات load نہیں ہوئے۔
+
+<br><br>
+
+${safe(error.message)}
+
 </div>
 `;
 
@@ -1167,21 +1175,16 @@ box.innerHTML =
 
 
 /* =========================
-   ADMIN OPEN
+   ADMIN
 ========================= */
 
 window.openAdmin =
 function(){
 
-if(
-!currentUser ||
-currentUser.email.toLowerCase()
-!==
-ADMIN_EMAIL.toLowerCase()
-){
+if(!isAdmin()){
 
 alert(
-"⛔ صرف Admin اس حصے میں داخل ہو سکتا ہے۔"
+"⛔ صرف Admin کے لیے۔"
 );
 
 return;
@@ -1193,13 +1196,13 @@ document
 .getElementById("adminPanel")
 .classList.remove("hidden");
 
+
 loadAdminAds();
 
-window.scrollTo({
-top:
+
 document
 .getElementById("adminPanel")
-.offsetTop,
+.scrollIntoView({
 behavior:"smooth"
 });
 
@@ -1212,9 +1215,14 @@ behavior:"smooth"
 
 async function loadAdminAds(){
 
+if(!isAdmin())
+return;
+
+
 const box =
 document
 .getElementById("adminAds");
+
 
 box.innerHTML =
 "Loading...";
@@ -1229,9 +1237,8 @@ collection(db,"ads")
 
 
 let total=0;
-let pending=0;
-let approved=0;
-let rejected=0;
+
+let featured=0;
 
 
 box.innerHTML="";
@@ -1240,46 +1247,13 @@ box.innerHTML="";
 snapshot.forEach(
 item=>{
 
-const ad =
-item.data();
+const ad=item.data();
 
 total++;
 
-if(ad.approved===true)
-approved++;
 
-if(ad.rejected===true)
-rejected++;
-
-if(
-ad.approved!==true &&
-ad.rejected!==true
-)
-pending++;
-
-
-const status =
-ad.rejected===true
-?
-`
-<span class="status rejected">
-Rejected
-</span>
-`
-:
-ad.approved===true
-?
-`
-<span class="status approved">
-Approved
-</span>
-`
-:
-`
-<span class="status pending">
-Pending
-</span>
-`;
+if(ad.featured===true)
+featured++;
 
 
 box.innerHTML +=
@@ -1291,14 +1265,16 @@ box.innerHTML +=
 ${safe(ad.title)}
 </h3>
 
-${status}
-
 <p>
 💰 Rs. ${Number(ad.price||0).toLocaleString()}
 </p>
 
 <p>
 📍 ${safe(ad.city)}
+</p>
+
+<p>
+🗂️ ${safe(ad.category)}
 </p>
 
 <p>
@@ -1316,31 +1292,31 @@ ${safe(ad.description||"")}
 <div class="row">
 
 <button
-class="btn-green"
-onclick="approveAd('${item.id}')"
+class="btn-orange"
+onclick="toggleFeatured(
+'${item.id}',
+${ad.featured===true}
+)"
 >
-✅ Approve
+
+⭐ ${
+ad.featured===true
+?
+"Featured ختم کریں"
+:
+"Featured کریں"
+}
+
 </button>
 
-<button
-class="btn-orange"
-onclick="rejectAd('${item.id}')"
->
-❌ Reject
-</button>
 
 <button
 class="btn-red"
 onclick="deleteAd('${item.id}')"
 >
-🗑️ Delete
-</button>
 
-<button
-class="btn-blue"
-onclick="featureAd('${item.id}', ${ad.featured===true})"
->
-⭐ ${ad.featured===true ? "Unfeature":"Featured"}
+🗑️ Delete
+
 </button>
 
 </div>
@@ -1354,35 +1330,25 @@ onclick="featureAd('${item.id}', ${ad.featured===true})"
 
 document
 .getElementById("adminStats")
-.innerHTML =
+.innerHTML=
 `
-<div class="card">
 
-<b>📊 Statistics</b>
-
-<p>
-Total Ads: ${total}
-</p>
-
-<p>
-⏳ Pending: ${pending}
-</p>
-
-<p>
-✅ Approved: ${approved}
-</p>
-
-<p>
-❌ Rejected: ${rejected}
-</p>
-
+<div class="stat">
+📊 Total Ads:
+<strong>${total}</strong>
 </div>
+
+<div class="stat">
+⭐ Featured:
+<strong>${featured}</strong>
+</div>
+
 `;
 
 
 if(total===0){
 
-box.innerHTML =
+box.innerHTML=
 `
 <div class="card center">
 کوئی اشتہار موجود نہیں۔
@@ -1394,12 +1360,11 @@ box.innerHTML =
 
 }catch(error){
 
-console.error(error);
-
-box.innerHTML =
+box.innerHTML=
 `
 <div class="card">
-❌ Admin data load نہیں ہوا:
+❌ Admin data نہیں آیا:
+<br>
 ${safe(error.message)}
 </div>
 `;
@@ -1410,13 +1375,14 @@ ${safe(error.message)}
 
 
 /* =========================
-   APPROVE
+   FEATURED
 ========================= */
 
-window.approveAd =
-async function(id){
+window.toggleFeatured =
+async function(id,current){
 
-if(!isAdmin()) return;
+if(!isAdmin())
+return;
 
 
 try{
@@ -1425,16 +1391,20 @@ await updateDoc(
 doc(db,"ads",id),
 {
 
-approved:true,
-
-rejected:false
+featured:!current
 
 }
 );
 
+
 alert(
-"✅ Advertisement Approved"
+current
+?
+"⭐ Featured ختم ہوگیا۔"
+:
+"⭐ Advertisement Featured ہوگیا۔"
 );
+
 
 loadAdminAds();
 
@@ -1444,51 +1414,7 @@ loadAds();
 }catch(error){
 
 alert(
-"Approve error: "+
-error.message
-);
-
-}
-
-};
-
-
-/* =========================
-   REJECT
-========================= */
-
-window.rejectAd =
-async function(id){
-
-if(!isAdmin()) return;
-
-
-try{
-
-await updateDoc(
-doc(db,"ads",id),
-{
-
-approved:false,
-
-rejected:true
-
-}
-);
-
-alert(
-"❌ Advertisement Rejected"
-);
-
-loadAdminAds();
-
-loadAds();
-
-
-}catch(error){
-
-alert(
-"Reject error: "+
+"❌ Error:\n"+
 error.message
 );
 
@@ -1504,14 +1430,17 @@ error.message
 window.deleteAd =
 async function(id){
 
-if(!isAdmin()) return;
+if(!isAdmin())
+return;
 
 
-if(
-!confirm(
-"کیا آپ واقعی یہ اشتہار Delete کرنا چاہتے ہیں؟"
-)
-)
+const confirmDelete =
+confirm(
+"کیا آپ یہ advertisement Delete کرنا چاہتے ہیں؟"
+);
+
+
+if(!confirmDelete)
 return;
 
 
@@ -1521,9 +1450,11 @@ await deleteDoc(
 doc(db,"ads",id)
 );
 
+
 alert(
-"🗑️ Advertisement Deleted"
+"🗑️ Advertisement Delete ہوگیا۔"
 );
+
 
 loadAdminAds();
 
@@ -1533,45 +1464,7 @@ loadAds();
 }catch(error){
 
 alert(
-"Delete error: "+
-error.message
-);
-
-}
-
-};
-
-
-/* =========================
-   FEATURE
-========================= */
-
-window.featureAd =
-async function(id,current){
-
-if(!isAdmin()) return;
-
-
-try{
-
-await updateDoc(
-doc(db,"ads",id),
-{
-
-featured:!current
-
-}
-);
-
-loadAdminAds();
-
-loadAds();
-
-
-}catch(error){
-
-alert(
-"Feature error: "+
+"❌ Delete error:\n"+
 error.message
 );
 
@@ -1586,11 +1479,13 @@ error.message
 
 function isAdmin(){
 
-return currentUser &&
+return Boolean(
+currentUser &&
 currentUser.email &&
 currentUser.email.toLowerCase()
 ===
-ADMIN_EMAIL.toLowerCase();
+ADMIN_EMAIL.toLowerCase()
+);
 
 }
 
@@ -1606,21 +1501,28 @@ String(phone||"")
 .replace(/\D/g,"");
 
 
-if(p.startsWith("0"))
+if(p.startsWith("0")){
+
 p=p.substring(1);
 
+}
 
-if(!p.startsWith("92"))
+
+if(!p.startsWith("92")){
+
 p="92"+p;
 
+}
 
-return "https://wa.me/"+p;
+
+return
+"https://wa.me/"+p;
 
 }
 
 
 /* =========================
-   SECURITY ESCAPE
+   SAFE TEXT
 ========================= */
 
 function safe(value){
@@ -1636,7 +1538,7 @@ return String(value||"")
 
 
 /* =========================
-   INITIAL LOAD
+   START
 ========================= */
 
 loadAds();
