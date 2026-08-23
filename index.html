@@ -110,11 +110,9 @@
   "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
   import {
-    getAuth,
-    signInWithPopup,
-    GoogleAuthProvider
-  } from
-  "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  getAuth,
+  signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
   const firebaseConfig = {
@@ -154,7 +152,28 @@
 
   window.login = async function(){
 
-    try{
+  const email = prompt("اپنا Email لکھیں:");
+  if (!email) return;
+
+  const password = prompt("اپنا Password لکھیں:");
+  if (!password) return;
+
+  try {
+
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    alert("Login کامیاب ہوگیا! اب آپ اشتہار لگا سکتے ہیں۔");
+
+  } catch(error) {
+
+    alert("Login میں مسئلہ: " + error.message);
+
+  }
+  }
 
       const provider = new GoogleAuthProvider();
 
