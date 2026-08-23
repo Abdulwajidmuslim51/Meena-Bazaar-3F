@@ -3,294 +3,1345 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Meena Bazaar 3F</title>
+
 <style>
-body{margin:0;font-family:Arial;background:#f3f4f6;color:#111}
-header{background:#2563eb;color:white;text-align:center;padding:20px}
-.container{max-width:700px;margin:auto;padding:15px}
-input,textarea,select{width:100%;padding:13px;margin:7px 0;border:1px solid #ddd;border-radius:9px;box-sizing:border-box}
-button{padding:12px 18px;border:0;border-radius:9px;margin:5px;cursor:pointer}
-.blue{background:#2563eb;color:white}
-.green{background:#16a34a;color:white}
-.dark{background:#111827;color:white}
-.card{background:white;padding:15px;margin:12px 0;border-radius:12px;box-shadow:0 2px 8px #0002}
-.price{font-size:20px;font-weight:bold;color:#2563eb}
-.hidden{display:none}
-.categories{display:flex;overflow:auto;gap:5px}
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Tahoma,sans-serif;
+  background:#f1f5f9;
+  color:#111827;
+}
+
+header{
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  color:white;
+  padding:22px 15px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 8px;
+  font-size:28px;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:15px;
+}
+
+.card{
+  background:white;
+  border-radius:15px;
+  padding:16px;
+  margin:15px 0;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+input,textarea,select{
+  width:100%;
+  padding:13px;
+  margin:7px 0;
+  border:1px solid #cbd5e1;
+  border-radius:10px;
+  font-size:15px;
+}
+
+textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+button{
+  border:0;
+  border-radius:9px;
+  padding:11px 16px;
+  margin:4px;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.btn-blue{
+  background:#2563eb;
+  color:white;
+}
+
+.btn-green{
+  background:#16a34a;
+  color:white;
+}
+
+.btn-red{
+  background:#dc2626;
+  color:white;
+}
+
+.btn-dark{
+  background:#111827;
+  color:white;
+}
+
+.btn-orange{
+  background:#ea580c;
+  color:white;
+}
+
+.btn-gray{
+  background:#e5e7eb;
+  color:#111827;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.search{
+  margin-bottom:10px;
+}
+
+.categories{
+  display:flex;
+  gap:5px;
+  overflow-x:auto;
+  padding:5px 0 12px;
+}
+
+.categories button{
+  white-space:nowrap;
+}
+
+.ad-image{
+  width:100%;
+  max-height:350px;
+  object-fit:cover;
+  border-radius:12px;
+  margin-bottom:10px;
+}
+
+.price{
+  color:#2563eb;
+  font-size:22px;
+  font-weight:bold;
+}
+
+.featured{
+  border:3px solid #f59e0b;
+}
+
+.featured-label{
+  display:inline-block;
+  background:#f59e0b;
+  color:white;
+  padding:5px 10px;
+  border-radius:20px;
+  margin-bottom:8px;
+}
+
+.status{
+  padding:7px 10px;
+  border-radius:8px;
+  display:inline-block;
+  margin:5px 0;
+  font-size:13px;
+}
+
+.pending{
+  background:#fef3c7;
+  color:#92400e;
+}
+
+.approved{
+  background:#dcfce7;
+  color:#166534;
+}
+
+.rejected{
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+.admin-card{
+  border-right:5px solid #2563eb;
+}
+
+.row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+}
+
+.row button{
+  flex:1;
+  min-width:110px;
+}
+
+.small{
+  font-size:13px;
+  color:#64748b;
+}
+
+.center{
+  text-align:center;
+}
+
+hr{
+  border:0;
+  border-top:1px solid #e5e7eb;
+  margin:15px 0;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<h1>🛍️ Meena Bazaar 3F</h1>
-<p>پرانے اور استعمال شدہ اشیاء کی خرید و فروخت</p>
 
-<button class="blue" onclick="login()">👤 Login</button>
-<button class="dark" onclick="showForm()">＋ اشتہار لگائیں</button>
+<h1>🛍️ Meena Bazaar 3F</h1>
+
+<p>خرید و فروخت کا آسان آن لائن بازار</p>
+
+<div id="authButtons">
+
+<button class="btn-blue" onclick="login()">
+👤 Login
+</button>
+
+<button class="btn-gray" onclick="registerUser()">
+➕ نیا اکاؤنٹ
+</button>
+
+</div>
+
+<div id="userArea" class="hidden">
+
+<span id="userEmail"></span>
+
+<button class="btn-gray" onclick="logout()">
+Logout
+</button>
+
+</div>
+
+<div id="adminButton" class="hidden">
+
+<button class="btn-orange" onclick="openAdmin()">
+🛡️ Admin Panel
+</button>
+
+</div>
+
 </header>
+
 
 <div class="container">
 
-<input id="search" placeholder="🔍 چیز تلاش کریں..." oninput="loadAds()">
+
+<!-- SEARCH -->
+
+<div class="card">
+
+<input
+id="search"
+class="search"
+placeholder="🔍 چیز، شہر یا تفصیل تلاش کریں..."
+oninput="loadAds()"
+>
 
 <div class="categories">
-<button onclick="setCategory('تمام')">تمام</button>
-<button onclick="setCategory('موبائل')">📱 موبائل</button>
-<button onclick="setCategory('گاڑی')">🚗 گاڑی</button>
-<button onclick="setCategory('فرنیچر')">🛋️ فرنیچر</button>
-<button onclick="setCategory('الیکٹرانکس')">💻 الیکٹرانکس</button>
-<button onclick="setCategory('دیگر')">📦 دیگر</button>
+
+<button class="btn-gray" onclick="setCategory('تمام')">
+تمام
+</button>
+
+<button class="btn-gray" onclick="setCategory('موبائل')">
+📱 موبائل
+</button>
+
+<button class="btn-gray" onclick="setCategory('گاڑی')">
+🚗 گاڑی
+</button>
+
+<button class="btn-gray" onclick="setCategory('فرنیچر')">
+🛋️ فرنیچر
+</button>
+
+<button class="btn-gray" onclick="setCategory('الیکٹرانکس')">
+💻 الیکٹرانکس
+</button>
+
+<button class="btn-gray" onclick="setCategory('کپڑے')">
+👕 کپڑے
+</button>
+
+<button class="btn-gray" onclick="setCategory('مکان')">
+🏠 مکان
+</button>
+
+<button class="btn-gray" onclick="setCategory('دیگر')">
+📦 دیگر
+</button>
+
 </div>
 
-<div id="form" class="hidden">
-<h2>نیا اشتہار</h2>
+</div>
 
-<input id="title" placeholder="چیز کا نام">
-<input id="price" type="number" placeholder="قیمت">
-<input id="city" placeholder="شہر">
+
+<!-- ADD AD -->
+
+<div id="adForm" class="card hidden">
+
+<h2>📢 نیا اشتہار</h2>
+
+<p class="small">
+فی الحال اشتہار لگانا مفت ہے۔
+</p>
+
+<input
+id="title"
+placeholder="چیز کا نام *"
+>
+
+<input
+id="price"
+type="number"
+placeholder="قیمت *"
+>
+
+<input
+id="city"
+placeholder="شہر *"
+>
 
 <select id="category">
-<option>موبائل</option>
-<option>گاڑی</option>
-<option>فرنیچر</option>
-<option>الیکٹرانکس</option>
-<option>دیگر</option>
+
+<option value="موبائل">📱 موبائل</option>
+<option value="گاڑی">🚗 گاڑی</option>
+<option value="فرنیچر">🛋️ فرنیچر</option>
+<option value="الیکٹرانکس">💻 الیکٹرانکس</option>
+<option value="کپڑے">👕 کپڑے</option>
+<option value="مکان">🏠 مکان</option>
+<option value="دیگر">📦 دیگر</option>
+
 </select>
 
-<textarea id="description" placeholder="چیز کی تفصیل"></textarea>
-<input id="phone" placeholder="موبائل نمبر">
+<textarea
+id="description"
+placeholder="چیز کی مکمل تفصیل *"
+></textarea>
 
-<button class="blue" onclick="addAd()">اشتہار محفوظ کریں</button>
+<input
+id="phone"
+placeholder="موبائل نمبر *"
+>
+
+<input
+id="imageUrl"
+placeholder="تصویر کا URL (فی الحال)"
+>
+
+<p class="small">
+📸 ابھی Firebase Storage فعال نہیں ہے، اس لیے فی الحال تصویر کا URL استعمال کریں۔
+</p>
+
+<div class="card">
+
+<h3>💰 Advertisement Fee</h3>
+
+<p id="feeText">
+فی الحال: Free
+</p>
+
+<select id="adPlan">
+
+<option value="free">
+Free Advertisement — Rs. 0
+</option>
+
+<option value="featured">
+Featured Advertisement — فی الحال Free
+</option>
+
+</select>
+
+<p class="small">
+Payment system بعد میں فعال کیا جا سکتا ہے۔
+</p>
+
 </div>
 
-<h2>تازہ اشتہارات</h2>
-<div id="ads">لوڈ ہو رہا ہے...</div>
+<button
+class="btn-blue"
+onclick="addAd()"
+>
+📢 اشتہار جمع کریں
+</button>
+
+<button
+class="btn-gray"
+onclick="hideAdForm()"
+>
+Cancel
+</button>
 
 </div>
+
+
+<!-- OPEN AD FORM -->
+
+<div class="center">
+
+<button
+class="btn-blue"
+onclick="showAdForm()"
+>
+＋ اپنا اشتہار لگائیں
+</button>
+
+</div>
+
+
+<!-- ADS -->
+
+<h2>🔥 تازہ اشتہارات</h2>
+
+<div id="ads">
+لوڈ ہو رہا ہے...
+</div>
+
+
+<!-- ADMIN -->
+
+<div id="adminPanel" class="card hidden admin-card">
+
+<h2>🛡️ Admin Panel</h2>
+
+<p>
+Admin:
+<strong>
+muslimabdulwajid51@gmail.com
+</strong>
+</p>
+
+<hr>
+
+<div id="adminStats"></div>
+
+<div id="adminAds">
+Admin data loading...
+</div>
+
+</div>
+
+
+</div>
+
 
 <script type="module">
 
-import {initializeApp}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+/* =========================
+   FIREBASE IMPORTS
+========================= */
+
+import {
+initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
 
 import {
 getFirestore,
 collection,
 addDoc,
 getDocs,
+doc,
+updateDoc,
+deleteDoc,
 serverTimestamp
 }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
 
 import {
 getAuth,
 signInWithEmailAndPassword,
-onAuthStateChanged
+createUserWithEmailAndPassword,
+onAuthStateChanged,
+signOut
 }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
 
 const firebaseConfig = {
-apiKey:"AIzaSyA-E7avzWjS9WLRMq6cgR2XA0f3urfsd4Q",
-authDomain:"meena-bazaar-3f.firebaseapp.com",
-projectId:"meena-bazaar-3f",
-storageBucket:"meena-bazaar-3f.firebasestorage.app",
-messagingSenderId:"95538058106",
-appId:"1:95538058106:web:c42bf08d9d092b3382fcc3"
+
+apiKey:
+"AIzaSyA-E7avzWjS9WLRMq6cgR2XA0f3urfsd4Q",
+
+authDomain:
+"meena-bazaar-3f.firebaseapp.com",
+
+projectId:
+"meena-bazaar-3f",
+
+storageBucket:
+"meena-bazaar-3f.firebasestorage.app",
+
+messagingSenderId:
+"95538058106",
+
+appId:
+"1:95538058106:web:c42bf08d9d092b3382fcc3"
+
 };
 
-const app=initializeApp(firebaseConfig);
-const db=getFirestore(app);
-const auth=getAuth(app);
 
-let category="تمام";
-let currentUser=null;
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getFirestore(app);
+
+const auth =
+getAuth(app);
 
 
-onAuthStateChanged(auth,user=>{
-currentUser=user;
+/* =========================
+   SETTINGS
+========================= */
+
+const ADMIN_EMAIL =
+"muslimabdulwajid51@gmail.com";
+
+/*
+   ابھی Advertisement Free ہے۔
+
+   بعد میں یہاں:
+   100
+   یا
+   200
+   وغیرہ کر سکتے ہیں۔
+*/
+
+const AD_FEE = 0;
+
+
+/* =========================
+   VARIABLES
+========================= */
+
+let currentUser = null;
+
+let selectedCategory = "تمام";
+
+
+/* =========================
+   AUTH STATE
+========================= */
+
+onAuthStateChanged(
+auth,
+user => {
+
+currentUser = user;
 
 if(user){
-alert("Login کامیاب ہوگیا!");
+
+document
+.getElementById("authButtons")
+.classList.add("hidden");
+
+document
+.getElementById("userArea")
+.classList.remove("hidden");
+
+document
+.getElementById("userEmail")
+textContent =
+user.email;
+
+if(
+user.email.toLowerCase()
+===
+ADMIN_EMAIL.toLowerCase()
+){
+
+document
+.getElementById("adminButton")
+.classList.remove("hidden");
+
+}else{
+
+document
+.getElementById("adminButton")
+.classList.add("hidden");
+
+}
+
+}else{
+
+document
+.getElementById("authButtons")
+.classList.remove("hidden");
+
+document
+.getElementById("userArea")
+.classList.add("hidden");
+
+document
+.getElementById("adminButton")
+.classList.add("hidden");
+
 }
 
 loadAds();
+
 });
 
 
-window.login=async function(){
+/* =========================
+   LOGIN
+========================= */
 
-const email=prompt("اپنا Email لکھیں:");
-if(!email)return;
+window.login = async function(){
 
-const password=prompt("اپنا Password لکھیں:");
-if(!password)return;
+const email =
+prompt("اپنا Email لکھیں:");
+
+if(!email) return;
+
+const password =
+prompt("اپنا Password لکھیں:");
+
+if(!password) return;
 
 try{
 
-await signInWithEmailAndPassword(
+await
+signInWithEmailAndPassword(
 auth,
 email,
 password
 );
 
+alert(
+"✅ Login کامیاب ہوگیا!"
+);
+
 }catch(error){
 
-alert("Login نہیں ہوا: "+error.message);
+alert(
+"❌ Login نہیں ہوا:\n"+
+error.message
+);
 
 }
 
 };
 
 
-window.showForm=function(){
+/* =========================
+   REGISTER
+========================= */
+
+window.registerUser = async function(){
+
+const email =
+prompt("نیا Email لکھیں:");
+
+if(!email) return;
+
+const password =
+prompt(
+"نیا Password لکھیں:\nکم از کم 6 حروف"
+);
+
+if(!password) return;
+
+try{
+
+await
+createUserWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+alert(
+"🎉 Account بن گیا!"
+);
+
+}catch(error){
+
+alert(
+"❌ Account نہیں بنا:\n"+
+error.message
+);
+
+}
+
+};
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+window.logout = async function(){
+
+await signOut(auth);
+
+alert("Logout ہوگیا۔");
+
+};
+
+
+/* =========================
+   SHOW FORM
+========================= */
+
+window.showAdForm = function(){
 
 if(!currentUser){
 
-alert("پہلے Login کریں، پھر اشتہار لگائیں۔");
+alert(
+"پہلے Login کریں۔"
+);
+
 return;
 
 }
 
-document.getElementById("form").classList.remove("hidden");
+document
+.getElementById("adForm")
+.classList.remove("hidden");
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
 
 };
 
 
-window.setCategory=function(c){
+window.hideAdForm = function(){
 
-category=c;
+document
+.getElementById("adForm")
+.classList.add("hidden");
+
+};
+
+
+/* =========================
+   CATEGORY
+========================= */
+
+window.setCategory =
+function(category){
+
+selectedCategory =
+category;
+
 loadAds();
 
 };
 
 
-window.addAd=async function(){
+/* =========================
+   ADD AD
+========================= */
+
+window.addAd = async function(){
 
 if(!currentUser){
 
-alert("پہلے Login کریں۔");
+alert(
+"پہلے Login کریں۔"
+);
+
 return;
 
 }
 
-const title=document.getElementById("title").value.trim();
-const price=document.getElementById("price").value;
-const city=document.getElementById("city").value.trim();
-const cat=document.getElementById("category").value;
-const description=document.getElementById("description").value.trim();
-const phone=document.getElementById("phone").value.trim();
 
-if(!title||!price||!city||!phone){
+const title =
+document
+.getElementById("title")
+.value.trim();
 
-alert("نام، قیمت، شہر اور موبائل نمبر لازمی ہیں۔");
+const price =
+document
+.getElementById("price")
+.value;
+
+const city =
+document
+.getElementById("city")
+.value.trim();
+
+const category =
+document
+.getElementById("category")
+.value;
+
+const description =
+document
+.getElementById("description")
+.value.trim();
+
+const phone =
+document
+.getElementById("phone")
+.value.trim();
+
+const imageUrl =
+document
+.getElementById("imageUrl")
+.value.trim();
+
+const adPlan =
+document
+.getElementById("adPlan")
+.value;
+
+
+if(
+!title ||
+!price ||
+!city ||
+!description ||
+!phone
+){
+
+alert(
+"⚠️ نام، قیمت، شہر، تفصیل اور موبائل نمبر لازمی ہیں۔"
+);
+
 return;
 
 }
+
+
+/*
+   ابھی payment نہیں لی جا رہی۔
+*/
+
+const paymentStatus =
+AD_FEE === 0
+?
+"free"
+:
+"pending";
+
 
 try{
 
-await addDoc(collection(db,"ads"),{
+
+await addDoc(
+collection(db,"ads"),
+{
 
 title:title,
+
 price:Number(price),
+
 city:city,
-category:cat,
+
+category:category,
+
 description:description,
+
 phone:phone,
 
-/* ابھی testing کے لیے true */
-approved:true,
+imageUrl:imageUrl,
 
-featured:false,
 userId:currentUser.uid,
-createdAt:serverTimestamp()
+
+userEmail:currentUser.email,
+
+plan:adPlan,
+
+adFee:AD_FEE,
+
+paymentStatus:paymentStatus,
+
+/*
+   عام اشتہار پہلے Admin approval کا منتظر ہوگا۔
+*/
+
+approved:false,
+
+rejected:false,
+
+featured:
+adPlan === "featured",
+
+createdAt:
+serverTimestamp()
+
+}
+);
+
+
+alert(
+"✅ اشتہار جمع ہوگیا!\n\nAdmin approval کے بعد یہ public ہوگا۔"
+);
+
+
+/* CLEAR FORM */
+
+document
+.getElementById("title")
+.value="";
+
+document
+.getElementById("price")
+.value="";
+
+document
+.getElementById("city")
+.value="";
+
+document
+.getElementById("description")
+.value="";
+
+document
+.getElementById("phone")
+.value="";
+
+document
+.getElementById("imageUrl")
+.value="";
+
+document
+.getElementById("adForm")
+.classList.add("hidden");
+
+
+loadAds();
+
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"❌ اشتہار محفوظ نہیں ہوا:\n"+
+error.message
+);
+
+}
+
+};
+
+
+/* =========================
+   LOAD PUBLIC ADS
+========================= */
+
+window.loadAds =
+async function(){
+
+const box =
+document.getElementById("ads");
+
+box.innerHTML =
+"لوڈ ہو رہا ہے...";
+
+
+try{
+
+const snapshot =
+await getDocs(
+collection(db,"ads")
+);
+
+
+const search =
+document
+.getElementById("search")
+.value
+.toLowerCase()
+.trim();
+
+
+let ads = [];
+
+
+snapshot.forEach(
+item => {
+
+const ad =
+item.data();
+
+if(
+ad.approved === true &&
+ad.rejected !== true
+){
+
+const searchable =
+(
+(ad.title||"")+
+" "+
+(ad.city||"")+
+" "+
+(ad.category||"")+
+" "+
+(ad.description||"")
+)
+.toLowerCase();
+
+const searchMatch =
+!search ||
+searchable.includes(search);
+
+const categoryMatch =
+selectedCategory === "تمام" ||
+ad.category === selectedCategory;
+
+if(
+searchMatch &&
+categoryMatch
+){
+
+ads.push({
+id:item.id,
+...ad
+});
+
+}
+
+}
 
 });
 
-alert("🎉 اشتہار کامیابی سے محفوظ ہوگیا!");
 
-document.getElementById("title").value="";
-document.getElementById("price").value="";
-document.getElementById("city").value="";
-document.getElementById("description").value="";
-document.getElementById("phone").value="";
+/*
+   Featured پہلے
+*/
 
-document.getElementById("form").classList.add("hidden");
+ads.sort(
+(a,b)=>
+Number(b.featured)-
+Number(a.featured)
+);
 
-loadAds();
+
+if(ads.length === 0){
+
+box.innerHTML =
+`
+<div class="card center">
+<h3>📭 کوئی اشتہار نہیں ملا</h3>
+<p>پہلا اشتہار آپ لگا سکتے ہیں۔</p>
+</div>
+`;
+
+return;
+
+}
+
+
+box.innerHTML = "";
+
+
+ads.forEach(ad => {
+
+let image = "";
+
+if(ad.imageUrl){
+
+image =
+`
+<img
+class="ad-image"
+src="${safe(ad.imageUrl)}"
+onerror="this.style.display='none'"
+>
+`;
+
+}
+
+
+const featured =
+ad.featured === true;
+
+
+const whatsapp =
+makeWhatsApp(ad.phone);
+
+
+box.innerHTML +=
+`
+
+<div class="card ${featured ? "featured":""}">
+
+${featured ?
+`<span class="featured-label">
+⭐ Featured
+</span>`
+:
+""}
+
+${image}
+
+<h2>
+${safe(ad.title)}
+</h2>
+
+<div class="price">
+Rs. ${Number(ad.price||0).toLocaleString()}
+</div>
+
+<p>
+📍 ${safe(ad.city)}
+</p>
+
+<p>
+🗂️ ${safe(ad.category)}
+</p>
+
+<p>
+${safe(ad.description)}
+</p>
+
+<p class="small">
+📞 ${safe(ad.phone)}
+</p>
+
+<div class="row">
+
+<a
+href="tel:${safe(ad.phone)}"
+>
+<button class="btn-blue">
+📞 Call
+</button>
+</a>
+
+<a
+href="${whatsapp}"
+target="_blank"
+>
+<button class="btn-green">
+💬 WhatsApp
+</button>
+</a>
+
+</div>
+
+</div>
+`;
+
+});
+
 
 }catch(error){
 
-alert("اشتہار محفوظ نہیں ہوا: "+error.message);
+console.error(error);
+
+box.innerHTML =
+`
+<div class="card">
+❌ اشتہارات لوڈ نہیں ہو سکے۔
+</div>
+`;
 
 }
 
 };
 
 
-window.loadAds=async function(){
+/* =========================
+   ADMIN OPEN
+========================= */
 
-const box=document.getElementById("ads");
+window.openAdmin =
+function(){
+
+if(
+!currentUser ||
+currentUser.email.toLowerCase()
+!==
+ADMIN_EMAIL.toLowerCase()
+){
+
+alert(
+"⛔ صرف Admin اس حصے میں داخل ہو سکتا ہے۔"
+);
+
+return;
+
+}
+
+
+document
+.getElementById("adminPanel")
+.classList.remove("hidden");
+
+loadAdminAds();
+
+window.scrollTo({
+top:
+document
+.getElementById("adminPanel")
+.offsetTop,
+behavior:"smooth"
+});
+
+};
+
+
+/* =========================
+   ADMIN ADS
+========================= */
+
+async function loadAdminAds(){
+
+const box =
+document
+.getElementById("adminAds");
+
+box.innerHTML =
+"Loading...";
+
 
 try{
 
-const snapshot=await getDocs(collection(db,"ads"));
+const snapshot =
+await getDocs(
+collection(db,"ads")
+);
 
-const search=
-document.getElementById("search").value.toLowerCase();
+
+let total=0;
+let pending=0;
+let approved=0;
+let rejected=0;
+
 
 box.innerHTML="";
 
-let count=0;
 
-snapshot.forEach(doc=>{
+snapshot.forEach(
+item=>{
 
-const ad=doc.data();
+const ad =
+item.data();
 
-const text=
-(ad.title||"")+" "+
-(ad.city||"")+" "+
-(ad.description||"");
+total++;
 
-const matchSearch=
-text.toLowerCase().includes(search);
+if(ad.approved===true)
+approved++;
 
-const matchCategory=
-category==="تمام"||ad.category===category;
+if(ad.rejected===true)
+rejected++;
 
-if(ad.approved===true&&matchSearch&&matchCategory){
+if(
+ad.approved!==true &&
+ad.rejected!==true
+)
+pending++;
 
-count++;
 
-const wa=
-"https://wa.me/92"+
-(ad.phone||"").replace(/^0/,"");
+const status =
+ad.rejected===true
+?
+`
+<span class="status rejected">
+Rejected
+</span>
+`
+:
+ad.approved===true
+?
+`
+<span class="status approved">
+Approved
+</span>
+`
+:
+`
+<span class="status pending">
+Pending
+</span>
+`;
 
-box.innerHTML+=`
+
+box.innerHTML +=
+`
 
 <div class="card">
 
-<h3>${safe(ad.title)}</h3>
+<h3>
+${safe(ad.title)}
+</h3>
 
-<div class="price">
-Rs. ${Number(ad.price).toLocaleString()}
-</div>
+${status}
 
-<p>📍 ${safe(ad.city)}</p>
+<p>
+💰 Rs. ${Number(ad.price||0).toLocaleString()}
+</p>
 
-<p>${safe(ad.description||"")}</p>
+<p>
+📍 ${safe(ad.city)}
+</p>
 
-<div>
+<p>
+👤 ${safe(ad.userEmail||"")}
+</p>
 
-<a href="tel:${ad.phone}">
-<button class="blue">📞 Call</button>
-</a>
+<p>
+📞 ${safe(ad.phone||"")}
+</p>
 
-<a href="${wa}" target="_blank">
-<button class="green">💬 WhatsApp</button>
-</a>
+<p>
+${safe(ad.description||"")}
+</p>
+
+<div class="row">
+
+<button
+class="btn-green"
+onclick="approveAd('${item.id}')"
+>
+✅ Approve
+</button>
+
+<button
+class="btn-orange"
+onclick="rejectAd('${item.id}')"
+>
+❌ Reject
+</button>
+
+<button
+class="btn-red"
+onclick="deleteAd('${item.id}')"
+>
+🗑️ Delete
+</button>
+
+<button
+class="btn-blue"
+onclick="featureAd('${item.id}', ${ad.featured===true})"
+>
+⭐ ${ad.featured===true ? "Unfeature":"Featured"}
+</button>
 
 </div>
 
@@ -298,31 +1349,283 @@ Rs. ${Number(ad.price).toLocaleString()}
 
 `;
 
-}
-
 });
 
-if(count===0){
 
-box.innerHTML="<p>ابھی کوئی اشتہار موجود نہیں۔</p>";
+document
+.getElementById("adminStats")
+.innerHTML =
+`
+<div class="card">
+
+<b>📊 Statistics</b>
+
+<p>
+Total Ads: ${total}
+</p>
+
+<p>
+⏳ Pending: ${pending}
+</p>
+
+<p>
+✅ Approved: ${approved}
+</p>
+
+<p>
+❌ Rejected: ${rejected}
+</p>
+
+</div>
+`;
+
+
+if(total===0){
+
+box.innerHTML =
+`
+<div class="card center">
+کوئی اشتہار موجود نہیں۔
+</div>
+`;
 
 }
+
 
 }catch(error){
 
-console.log(error);
+console.error(error);
 
-box.innerHTML=
-"<p>اشتہارات لوڈ نہیں ہو سکے۔</p>";
+box.innerHTML =
+`
+<div class="card">
+❌ Admin data load نہیں ہوا:
+${safe(error.message)}
+</div>
+`;
+
+}
+
+}
+
+
+/* =========================
+   APPROVE
+========================= */
+
+window.approveAd =
+async function(id){
+
+if(!isAdmin()) return;
+
+
+try{
+
+await updateDoc(
+doc(db,"ads",id),
+{
+
+approved:true,
+
+rejected:false
+
+}
+);
+
+alert(
+"✅ Advertisement Approved"
+);
+
+loadAdminAds();
+
+loadAds();
+
+
+}catch(error){
+
+alert(
+"Approve error: "+
+error.message
+);
 
 }
 
 };
 
 
+/* =========================
+   REJECT
+========================= */
+
+window.rejectAd =
+async function(id){
+
+if(!isAdmin()) return;
+
+
+try{
+
+await updateDoc(
+doc(db,"ads",id),
+{
+
+approved:false,
+
+rejected:true
+
+}
+);
+
+alert(
+"❌ Advertisement Rejected"
+);
+
+loadAdminAds();
+
+loadAds();
+
+
+}catch(error){
+
+alert(
+"Reject error: "+
+error.message
+);
+
+}
+
+};
+
+
+/* =========================
+   DELETE
+========================= */
+
+window.deleteAd =
+async function(id){
+
+if(!isAdmin()) return;
+
+
+if(
+!confirm(
+"کیا آپ واقعی یہ اشتہار Delete کرنا چاہتے ہیں؟"
+)
+)
+return;
+
+
+try{
+
+await deleteDoc(
+doc(db,"ads",id)
+);
+
+alert(
+"🗑️ Advertisement Deleted"
+);
+
+loadAdminAds();
+
+loadAds();
+
+
+}catch(error){
+
+alert(
+"Delete error: "+
+error.message
+);
+
+}
+
+};
+
+
+/* =========================
+   FEATURE
+========================= */
+
+window.featureAd =
+async function(id,current){
+
+if(!isAdmin()) return;
+
+
+try{
+
+await updateDoc(
+doc(db,"ads",id),
+{
+
+featured:!current
+
+}
+);
+
+loadAdminAds();
+
+loadAds();
+
+
+}catch(error){
+
+alert(
+"Feature error: "+
+error.message
+);
+
+}
+
+};
+
+
+/* =========================
+   ADMIN CHECK
+========================= */
+
+function isAdmin(){
+
+return currentUser &&
+currentUser.email &&
+currentUser.email.toLowerCase()
+===
+ADMIN_EMAIL.toLowerCase();
+
+}
+
+
+/* =========================
+   WHATSAPP
+========================= */
+
+function makeWhatsApp(phone){
+
+let p =
+String(phone||"")
+.replace(/\D/g,"");
+
+
+if(p.startsWith("0"))
+p=p.substring(1);
+
+
+if(!p.startsWith("92"))
+p="92"+p;
+
+
+return "https://wa.me/"+p;
+
+}
+
+
+/* =========================
+   SECURITY ESCAPE
+========================= */
+
 function safe(value){
 
-return String(value)
+return String(value||"")
 .replaceAll("&","&amp;")
 .replaceAll("<","&lt;")
 .replaceAll(">","&gt;")
@@ -330,6 +1633,11 @@ return String(value)
 .replaceAll("'","&#039;");
 
 }
+
+
+/* =========================
+   INITIAL LOAD
+========================= */
 
 loadAds();
 
