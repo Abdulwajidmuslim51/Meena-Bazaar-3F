@@ -1,9 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ur" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Meena Bazaar 3F</title>
+
+<script src="https://upload-widget.cloudinary.com/global/all.js"></script>
 
 <style>
 *{box-sizing:border-box}
@@ -17,12 +19,14 @@ color:#111827
 
 header{
 background:linear-gradient(135deg,#2563eb,#1d4ed8);
-color:#fff;
+color:white;
 padding:22px 15px;
 text-align:center
 }
 
-h1{margin:0 0 8px}
+header h1{
+margin:0 0 8px
+}
 
 .container{
 max-width:1000px;
@@ -31,11 +35,11 @@ padding:15px
 }
 
 .card{
-background:#fff;
+background:white;
 border-radius:15px;
 padding:16px;
 margin:15px 0;
-box-shadow:0 3px 12px #00000012
+box-shadow:0 3px 12px rgba(0,0,0,.08)
 }
 
 input,textarea,select{
@@ -47,7 +51,10 @@ border-radius:10px;
 font-size:15px
 }
 
-textarea{min-height:90px}
+textarea{
+min-height:90px;
+resize:vertical
+}
 
 button{
 border:0;
@@ -58,20 +65,25 @@ cursor:pointer;
 font-size:14px
 }
 
-.blue{background:#2563eb;color:#fff}
-.green{background:#16a34a;color:#fff}
-.red{background:#dc2626;color:#fff}
-.dark{background:#111827;color:#fff}
-.orange{background:#ea580c;color:#fff}
+.blue{background:#2563eb;color:white}
+.green{background:#16a34a;color:white}
+.red{background:#dc2626;color:white}
+.dark{background:#111827;color:white}
+.orange{background:#ea580c;color:white}
 .gray{background:#e5e7eb;color:#111827}
 
-.hidden{display:none!important}
-.center{text-align:center}
+.hidden{
+display:none!important
+}
+
+.center{
+text-align:center
+}
 
 .row{
 display:flex;
 flex-wrap:wrap;
-gap:4px
+gap:5px
 }
 
 .row>*{
@@ -79,21 +91,37 @@ flex:1;
 min-width:120px
 }
 
-.cats{
+.categories{
 display:flex;
 gap:5px;
-overflow:auto
+overflow-x:auto;
+padding-bottom:8px
 }
 
-.cats button{
+.categories button{
 white-space:nowrap
 }
 
-.ad-img{
+.ad-image{
 width:100%;
-max-height:360px;
+height:250px;
 object-fit:cover;
-border-radius:12px
+border-radius:12px;
+margin-bottom:8px
+}
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:7px;
+margin-bottom:10px
+}
+
+.gallery img{
+width:100%;
+height:170px;
+object-fit:cover;
+border-radius:10px
 }
 
 .price{
@@ -107,49 +135,29 @@ border:3px solid #f59e0b
 }
 
 .sold{
-opacity:.78;
-border:3px solid #dc2626
+border:3px solid #dc2626;
+opacity:.8
 }
 
 .badge{
 display:inline-block;
 padding:5px 10px;
 border-radius:20px;
-color:#fff;
+color:white;
 margin-bottom:8px
 }
 
-.b-featured{background:#f59e0b}
-.b-sold{background:#dc2626}
+.featured-badge{
+background:#f59e0b
+}
+
+.sold-badge{
+background:#dc2626
+}
 
 .small{
 font-size:13px;
 color:#64748b
-}
-
-.chat{
-max-height:400px;
-overflow:auto;
-background:#f8fafc;
-padding:10px;
-border-radius:12px
-}
-
-.msg{
-padding:9px 12px;
-margin:6px 0;
-border-radius:12px;
-max-width:82%;
-background:#e5e7eb
-}
-
-.mine{
-margin-right:auto;
-background:#dbeafe
-}
-
-.theirs{
-margin-left:auto
 }
 
 .stat{
@@ -160,17 +168,36 @@ border-radius:10px;
 margin:4px
 }
 
-.gallery{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:7px
+.chat-box{
+max-height:400px;
+overflow-y:auto;
+background:#f8fafc;
+padding:10px;
+border-radius:12px
 }
 
-.gallery img{
-width:100%;
-height:170px;
-object-fit:cover;
-border-radius:10px
+.message{
+padding:9px 12px;
+margin:6px 0;
+border-radius:12px;
+max-width:80%;
+background:#e5e7eb
+}
+
+.my-message{
+margin-right:auto;
+background:#dbeafe
+}
+
+.other-message{
+margin-left:auto
+}
+
+.upload-status{
+background:#eff6ff;
+padding:10px;
+border-radius:10px;
+margin-top:8px
 }
 
 @media(min-width:700px){
@@ -235,45 +262,37 @@ placeholder="🔍 چیز، شہر یا تفصیل تلاش کریں..."
 oninput="loadAds()"
 >
 
-<div class="cats">
+<div class="categories">
 
-<button class="gray"
-onclick="setCategory('تمام')">
+<button class="gray" onclick="setCategory('تمام')">
 تمام
 </button>
 
-<button class="gray"
-onclick="setCategory('موبائل')">
+<button class="gray" onclick="setCategory('موبائل')">
 📱 موبائل
 </button>
 
-<button class="gray"
-onclick="setCategory('گاڑی')">
+<button class="gray" onclick="setCategory('گاڑی')">
 🚗 گاڑی
 </button>
 
-<button class="gray"
-onclick="setCategory('فرنیچر')">
+<button class="gray" onclick="setCategory('فرنیچر')">
 🛋️ فرنیچر
 </button>
 
-<button class="gray"
-onclick="setCategory('الیکٹرانکس')">
+<button class="gray" onclick="setCategory('الیکٹرانکس')">
 💻 الیکٹرانکس
 </button>
 
-<button class="gray"
-onclick="setCategory('کپڑے')">
+<button class="gray" onclick="setCategory('کپڑے')">
 👕 کپڑے
 </button>
 
-<button class="gray"
-onclick="setCategory('مکان')">
+<button class="gray" onclick="setCategory('مکان')">
 🏠 مکان
 </button>
 
-<button class="gray"
-onclick="setCategory('دیگر')">
+<button class="gray" onclick="setCategory('دیگر')">
 📦 دیگر
 </button>
 
@@ -282,25 +301,29 @@ onclick="setCategory('دیگر')">
 </div>
 
 
+<!-- ADD BUTTON -->
+
 <div class="center">
 
 <button
 class="blue"
 onclick="showAdForm()">
+
 ＋ اپنا اشتہار لگائیں
+
 </button>
 
 </div>
 
 
-<!-- ADD AD -->
+<!-- ADD FORM -->
 
 <div
 id="adForm"
 class="card hidden"
 >
 
-<h2>📢 نیا اشتہار</h2>
+<h2>📢 نیا اشتہار لگائیں</h2>
 
 <p class="small">
 فی الحال تمام اشتہارات مفت ہیں۔
@@ -325,19 +348,19 @@ placeholder="شہر *"
 
 <select id="category">
 
-<option>موبائل</option>
-<option>گاڑی</option>
-<option>فرنیچر</option>
-<option>الیکٹرانکس</option>
-<option>کپڑے</option>
-<option>مکان</option>
-<option>دیگر</option>
+<option value="موبائل">📱 موبائل</option>
+<option value="گاڑی">🚗 گاڑی</option>
+<option value="فرنیچر">🛋️ فرنیچر</option>
+<option value="الیکٹرانکس">💻 الیکٹرانکس</option>
+<option value="کپڑے">👕 کپڑے</option>
+<option value="مکان">🏠 مکان</option>
+<option value="دیگر">📦 دیگر</option>
 
 </select>
 
 <textarea
 id="description"
-placeholder="مکمل تفصیل *">
+placeholder="چیز کی مکمل تفصیل *">
 </textarea>
 
 <input
@@ -345,37 +368,77 @@ id="phone"
 placeholder="موبائل / WhatsApp نمبر *"
 >
 
-<textarea
-id="imageUrls"
-placeholder="تصویر کے URL لکھیں، ایک URL فی لائن">
-</textarea>
+
+<!-- CLOUDINARY IMAGE UPLOAD -->
+
+<div class="card">
+
+<h3>📸 تصاویر</h3>
+
+<p class="small">
+اپنے موبائل سے ایک یا کئی تصاویر منتخب کریں۔
+</p>
+
+<button
+class="green"
+onclick="openUploader()">
+
+📷 تصویر / تصاویر Upload کریں
+
+</button>
+
+<div
+id="uploadStatus"
+class="upload-status hidden">
+</div>
+
+<div
+id="preview"
+class="gallery">
+</div>
+
+</div>
+
+
+<!-- PLAN -->
 
 <select id="plan">
 
 <option value="free">
-Free — Rs. 0
+Free Advertisement — Rs. 0
 </option>
 
 <option value="featured">
-Featured — ابھی Free
+Featured Advertisement — ابھی Free
 </option>
 
 </select>
 
+<p class="small">
+💰 ابھی payment نہیں لی جا رہی۔ بعد میں paid advertisement فعال کیا جا سکتا ہے۔
+</p>
+
+
 <button
 class="blue"
 onclick="addAd()">
-📢 Publish
+
+📢 اشتہار Publish کریں
+
 </button>
 
 <button
 class="gray"
 onclick="hideAdForm()">
+
 Cancel
+
 </button>
 
 </div>
 
+
+<!-- ADS -->
 
 <h2>🔥 تازہ اشتہارات</h2>
 
@@ -397,8 +460,7 @@ class="card hidden"
 
 <div
 id="chatMessages"
-class="chat">
-Loading...
+class="chat-box">
 </div>
 
 <textarea
@@ -406,21 +468,21 @@ id="chatInput"
 placeholder="پیغام لکھیں...">
 </textarea>
 
-<div class="row">
-
 <button
 class="blue"
 onclick="sendMessage()">
+
 📤 Send
+
 </button>
 
 <button
 class="gray"
 onclick="closeChat()">
-بند کریں
-</button>
 
-</div>
+بند کریں
+
+</button>
 
 </div>
 
@@ -432,9 +494,7 @@ id="adminPanel"
 class="card hidden"
 >
 
-<h2>
-🛡️ Admin Panel
-</h2>
+<h2>🛡️ Admin Panel</h2>
 
 <p>
 Admin:
@@ -455,7 +515,9 @@ muslimabdulwajid51@gmail.com
 <script type="module">
 
 
-/* FIREBASE */
+/* =====================================
+   FIREBASE
+===================================== */
 
 import{
 initializeApp
@@ -494,7 +556,9 @@ from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
-/* CONFIG */
+/* =====================================
+   FIREBASE CONFIG
+===================================== */
 
 const firebaseConfig={
 
@@ -529,120 +593,167 @@ const auth=
 getAuth(app);
 
 
-const ADMIN=
+/* =====================================
+   CLOUDINARY
+===================================== */
+
+const CLOUD_NAME=
+"b3roqofo";
+
+const UPLOAD_PRESET=
+"Meena Bazaar 3F";
+
+
+/* =====================================
+   ADMIN
+===================================== */
+
+const ADMIN_EMAIL=
 "muslimabdulwajid51@gmail.com";
 
 
-let user=null;
+/* =====================================
+   VARIABLES
+===================================== */
 
-let cat="تمام";
+let currentUser=null;
+
+let selectedCategory="تمام";
+
+let uploadedImages=[];
 
 let activeChat=null;
 
-let unsub=null;
+let chatUnsubscribe=null;
 
 
-const $=
-id=>document.getElementById(id);
+/* =====================================
+   HELPERS
+===================================== */
+
+function $(id){
+
+return document.getElementById(id);
+
+}
 
 
-const esc=
-v=>
-String(v??"")
+function safe(value){
+
+return String(value??"")
 .replaceAll("&","&amp;")
 .replaceAll("<","&lt;")
 .replaceAll(">","&gt;")
 .replaceAll('"',"&quot;")
 .replaceAll("'","&#039;");
 
+}
 
-function admin(){
 
-return !!(
-user?.email &&
-user.email.toLowerCase()
+function isAdmin(){
+
+return Boolean(
+currentUser &&
+currentUser.email &&
+currentUser.email.toLowerCase()
 ===
-ADMIN.toLowerCase()
+ADMIN_EMAIL.toLowerCase()
 );
 
 }
 
 
-function wa(phone){
+function makeWhatsApp(phone){
 
-let n=
+let p=
 String(phone||"")
 .replace(/\D/g,"");
 
-if(n.startsWith("0"))
-n=n.slice(1);
+if(p.startsWith("0")){
+p=p.substring(1);
+}
 
-if(!n.startsWith("92"))
-n="92"+n;
+if(!p.startsWith("92")){
+p="92"+p;
+}
 
-return "https://wa.me/"+n;
+return "https://wa.me/"+p;
 
 }
 
 
-/* AUTH */
+/* =====================================
+   AUTH STATE
+===================================== */
 
 onAuthStateChanged(
 auth,
-u=>{
+user=>{
 
-user=u;
+currentUser=user;
 
 $("authButtons")
 .classList
-.toggle("hidden",!!u);
+.toggle("hidden",!!user);
 
 $("userArea")
 .classList
-.toggle("hidden",!u);
+.toggle("hidden",!user);
 
 $("adminButton")
 .classList
-.toggle("hidden",!admin());
+.toggle("hidden",!isAdmin());
 
-if(u)
-$("userEmail").textContent=
-u.email;
+
+if(user){
+
+$("userEmail")
+.textContent=
+user.email;
+
+}
 
 loadAds();
 
 });
 
 
-/* LOGIN */
+/* =====================================
+   LOGIN
+===================================== */
 
 window.login=
-async()=>{
+async function(){
 
-const e=
-prompt("Email:");
+const email=
+prompt("اپنا Email لکھیں:");
 
-if(!e)
+if(!email)
 return;
 
-const p=
-prompt("Password:");
+const password=
+prompt("اپنا Password لکھیں:");
 
-if(!p)
+if(!password)
 return;
 
 try{
 
 await signInWithEmailAndPassword(
-auth,e,p
+auth,
+email,
+password
 );
 
-alert("✅ Login کامیاب");
+alert(
+"✅ Login کامیاب ہوگیا!"
+);
 
-}catch(x){
+}catch(error){
 
 alert(
-"❌ "+x.message
+"❌ Login نہیں ہوا:\n"+
+error.message
 );
 
 }
@@ -650,39 +761,44 @@ alert(
 };
 
 
-/* REGISTER */
+/* =====================================
+   REGISTER
+===================================== */
 
 window.registerUser=
-async()=>{
+async function(){
 
-const e=
-prompt("نیا Email:");
+const email=
+prompt("نیا Email لکھیں:");
 
-if(!e)
+if(!email)
 return;
 
-const p=
+const password=
 prompt(
-"Password (کم از کم 6 حروف):"
+"Password لکھیں:\nکم از کم 6 حروف"
 );
 
-if(!p)
+if(!password)
 return;
 
 try{
 
 await createUserWithEmailAndPassword(
-auth,e,p
+auth,
+email,
+password
 );
 
 alert(
-"🎉 Account بن گیا"
+"🎉 Account بن گیا!"
 );
 
-}catch(x){
+}catch(error){
 
 alert(
-"❌ "+x.message
+"❌ Account نہیں بنا:\n"+
+error.message
 );
 
 }
@@ -690,33 +806,29 @@ alert(
 };
 
 
-/* LOGOUT */
+/* =====================================
+   LOGOUT
+===================================== */
 
 window.logout=
-()=>signOut(auth);
+async function(){
 
-
-/* CATEGORY */
-
-window.setCategory=
-c=>{
-
-cat=c;
-
-loadAds();
+await signOut(auth);
 
 };
 
 
-/* FORM */
+/* =====================================
+   FORM
+===================================== */
 
 window.showAdForm=
-()=>{
+function(){
 
-if(!user){
+if(!currentUser){
 
 alert(
-"پہلے Login کریں"
+"⚠️ پہلے Login کریں۔"
 );
 
 return;
@@ -731,21 +843,26 @@ $("adForm")
 
 
 window.hideAdForm=
-()=>
+function(){
+
 $("adForm")
 .classList
 .add("hidden");
 
+};
 
-/* ADD AD */
 
-window.addAd=
-async()=>{
+/* =====================================
+   CLOUDINARY UPLOADER
+===================================== */
 
-if(!user){
+window.openUploader=
+function(){
+
+if(!currentUser){
 
 alert(
-"پہلے Login کریں"
+"⚠️ پہلے Login کریں۔"
 );
 
 return;
@@ -753,35 +870,249 @@ return;
 }
 
 
+const widget=
+cloudinary.createUploadWidget(
+
+{
+
+cloudName:
+CLOUD_NAME,
+
+uploadPreset:
+UPLOAD_PRESET,
+
+multiple:true,
+
+maxFiles:10,
+
+sources:[
+"local",
+"camera"
+],
+
+resourceType:"image",
+
+clientAllowedFormats:[
+"jpg",
+"jpeg",
+"png",
+"webp"
+],
+
+maxFileSize:
+10000000,
+
+folder:
+"meena_bazaar_3f"
+
+},
+
+(error,result)=>{
+
+if(error){
+
+console.error(error);
+
+$("uploadStatus")
+.classList
+.remove("hidden");
+
+$("uploadStatus")
+.innerHTML=
+"❌ Upload error: "+
+safe(error.message||error);
+
+return;
+
+}
+
+
+if(
+result &&
+result.event==="upload-added"
+){
+
+$("uploadStatus")
+.classList
+.remove("hidden");
+
+$("uploadStatus")
+.innerHTML=
+"⏳ تصویر upload ہو رہی ہے...";
+
+}
+
+
+if(
+result &&
+result.event==="success"
+){
+
+const url=
+result.info.secure_url;
+
+uploadedImages.push(url);
+
+showPreview();
+
+
+$("uploadStatus")
+.classList
+.remove("hidden");
+
+$("uploadStatus")
+.innerHTML=
+"✅ "+uploadedImages.length+
+" تصویر upload ہوگئی۔";
+
+}
+
+
+if(
+result &&
+result.event==="queues-end"
+){
+
+$("uploadStatus")
+.classList
+.remove("hidden");
+
+$("uploadStatus")
+.innerHTML=
+"✅ تمام تصاویر upload ہوگئیں۔";
+
+}
+
+}
+
+);
+
+
+widget.open();
+
+};
+
+
+/* =====================================
+   IMAGE PREVIEW
+===================================== */
+
+function showPreview(){
+
+const box=
+$("preview");
+
+box.innerHTML="";
+
+
+uploadedImages.forEach(
+(url,index)=>{
+
+box.innerHTML+=
+`
+
+<div
+style="position:relative">
+
+<img
+src="${safe(url)}"
+class="ad-image"
+>
+
+<button
+class="red"
+style="
+position:absolute;
+top:5px;
+left:5px;
+"
+onclick="removeImage(${index})">
+
+✕
+
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+window.removeImage=
+function(index){
+
+uploadedImages.splice(index,1);
+
+showPreview();
+
+};
+
+
+/* =====================================
+   CATEGORY
+===================================== */
+
+window.setCategory=
+function(category){
+
+selectedCategory=
+category;
+
+loadAds();
+
+};
+
+
+/* =====================================
+   ADD AD
+===================================== */
+
+window.addAd=
+async function(){
+
+if(!currentUser){
+
+alert("پہلے Login کریں۔");
+
+return;
+
+}
+
+
 const title=
-$("title").value.trim();
+$("title")
+.value
+.trim();
 
 const price=
-$("price").value;
+$("price")
+.value;
 
 const city=
-$("city").value.trim();
+$("city")
+.value
+.trim();
 
 const category=
-$("category").value;
+$("category")
+.value;
 
 const description=
-$("description").value.trim();
+$("description")
+.value
+.trim();
 
 const phone=
-$("phone").value.trim();
+$("phone")
+.value
+.trim();
 
 const plan=
-$("plan").value;
-
-
-const images=
-$("imageUrls")
-.value
-.split(/\n|,/)
-.map(x=>x.trim())
-.filter(Boolean)
-.slice(0,10);
+$("plan")
+.value;
 
 
 if(
@@ -793,7 +1124,7 @@ price==="" ||
 ){
 
 alert(
-"نام، قیمت، شہر، تفصیل اور نمبر لازمی ہیں"
+"⚠️ نام، قیمت، شہر، تفصیل اور نمبر لازمی ہیں۔"
 );
 
 return;
@@ -807,28 +1138,30 @@ await addDoc(
 collection(db,"ads"),
 {
 
-title,
+title:title,
 
 price:Number(price),
 
-city,
+city:city,
 
-category,
+category:category,
 
-description,
+description:description,
 
-phone,
+phone:phone,
 
-images,
+images:[...uploadedImages],
 
-userId:user.uid,
+userId:
+currentUser.uid,
 
-userEmail:user.email,
+userEmail:
+currentUser.email,
+
+plan:plan,
 
 featured:
 plan==="featured",
-
-plan,
 
 paymentStatus:
 "free",
@@ -847,22 +1180,29 @@ serverTimestamp()
 
 
 alert(
-"🎉 اشتہار Publish ہوگیا"
+"🎉 آپ کا اشتہار Publish ہوگیا!"
 );
 
 
-[
-"title",
-"price",
-"city",
-"description",
-"phone",
-"imageUrls"
-]
-.forEach(
-id=>
-$(id).value=""
-);
+/* CLEAR */
+
+$("title").value="";
+
+$("price").value="";
+
+$("city").value="";
+
+$("description").value="";
+
+$("phone").value="";
+
+uploadedImages=[];
+
+$("preview").innerHTML="";
+
+$("uploadStatus")
+.classList
+.add("hidden");
 
 
 hideAdForm();
@@ -870,10 +1210,13 @@ hideAdForm();
 loadAds();
 
 
-}catch(x){
+}catch(error){
+
+console.error(error);
 
 alert(
-"❌ "+x.message
+"❌ اشتہار محفوظ نہیں ہوا:\n"+
+error.message
 );
 
 }
@@ -881,10 +1224,12 @@ alert(
 };
 
 
-/* LOAD ADS */
+/* =====================================
+   LOAD ADS
+===================================== */
 
 window.loadAds=
-async()=>{
+async function(){
 
 const box=
 $("ads");
@@ -895,13 +1240,13 @@ box.innerHTML=
 
 try{
 
-const s=
+const snapshot=
 await getDocs(
 collection(db,"ads")
 );
 
 
-const term=
+const search=
 $("search")
 .value
 .toLowerCase()
@@ -911,41 +1256,49 @@ $("search")
 let ads=[];
 
 
-s.forEach(
-d=>{
+snapshot.forEach(
+item=>{
 
-const x=d.data();
+const ad=
+item.data();
 
 
 if(
-x.approved===true &&
-!x.rejected
+ad.approved===true &&
+ad.rejected!==true
 ){
 
-const hay=
+const searchable=
 (
-(x.title||"")+
+(ad.title||"")+
 " "+
-(x.city||"")+
+(ad.city||"")+
 " "+
-(x.category||"")+
+(ad.category||"")+
 " "+
-(x.description||"")
+(ad.description||"")
 )
 .toLowerCase();
 
 
+const searchMatch=
+!search ||
+searchable.includes(search);
+
+
+const categoryMatch=
+selectedCategory==="تمام" ||
+ad.category===selectedCategory;
+
+
 if(
-(!term ||
-hay.includes(term))
-&&
-(cat==="تمام" ||
-x.category===cat)
+searchMatch &&
+categoryMatch
 ){
 
 ads.push({
-id:d.id,
-...x
+id:item.id,
+...ad
 });
 
 }
@@ -962,13 +1315,21 @@ Number(a.featured)
 );
 
 
-if(!ads.length){
+if(ads.length===0){
 
 box.innerHTML=
 `
+
 <div class="card center">
-📭 ابھی کوئی اشتہار نہیں
+
+<h3>📭 ابھی کوئی اشتہار نہیں</h3>
+
+<p>
+آپ پہلا اشتہار لگا سکتے ہیں۔
+</p>
+
 </div>
+
 `;
 
 return;
@@ -980,28 +1341,57 @@ box.innerHTML="";
 
 
 ads.forEach(
-x=>{
+ad=>{
 
-const mine=
-user &&
-x.userId===user.uid;
+const images=
+Array.isArray(ad.images)
+?
+ad.images
+:
+(ad.imageUrl?[ad.imageUrl]:[]);
 
-const sold=
-!!x.sold;
+
+let imageHTML="";
 
 
-const imgs=
-(x.images||[])
-.map(
-i=>
+if(images.length){
+
+imageHTML=
 `
+
+<div class="gallery">
+
+${
+images
+.map(
+img=>
+`
+
 <img
-src="${esc(i)}"
+src="${safe(img)}"
 onerror="this.style.display='none'"
 >
+
 `
 )
-.join("");
+.join("")
+}
+
+</div>
+
+`;
+
+}
+
+
+const mine=
+currentUser &&
+ad.userId===
+currentUser.uid;
+
+
+const whatsapp=
+makeWhatsApp(ad.phone);
 
 
 box.innerHTML+=
@@ -1009,111 +1399,159 @@ box.innerHTML+=
 
 <div
 class="card
-${x.featured&&!sold?"featured":""}
-${sold?"sold":""}"
+${ad.featured?"featured":""}
+${ad.sold?"sold":""}"
 >
 
+
 ${
-sold
+ad.sold
 ?
-'<span class="badge b-sold">🔴 SOLD</span>'
+`
+<span class="badge sold-badge">
+🔴 SOLD
+</span>
+`
 :
 (
-x.featured
+ad.featured
 ?
-'<span class="badge b-featured">⭐ Featured</span>'
+`
+<span class="badge featured-badge">
+⭐ Featured
+</span>
+`
 :
 ""
 )
 }
 
-${
-imgs
-?
-`<div class="gallery">${imgs}</div>`
-:
-""
-}
+
+${imageHTML}
+
 
 <h2>
-${esc(x.title)}
+${safe(ad.title)}
 </h2>
 
+
 <div class="price">
-Rs. ${Number(x.price||0).toLocaleString()}
+
+Rs.
+${Number(ad.price||0)
+.toLocaleString()}
+
 </div>
 
-<p>
-📍 ${esc(x.city)}
-&nbsp;
-🗂️ ${esc(x.category)}
-</p>
 
 <p>
-${esc(x.description)}
+📍 ${safe(ad.city)}
 </p>
+
+
+<p>
+🗂️ ${safe(ad.category)}
+</p>
+
+
+<p>
+${safe(ad.description)}
+</p>
+
 
 <p class="small">
-📞 ${esc(x.phone)}
+
+📞 ${safe(ad.phone)}
+
 </p>
+
 
 <div class="row">
 
-<a
-href="tel:${esc(x.phone)}">
+
+<a href="tel:${safe(ad.phone)}">
+
 <button class="blue">
 📞 Call
 </button>
+
 </a>
 
+
 <a
-href="${wa(x.phone)}"
-target="_blank">
+href="${whatsapp}"
+target="_blank"
+rel="noopener">
+
 <button class="green">
 💬 WhatsApp
 </button>
+
 </a>
 
+
 ${
-!mine&&!sold&&user
+(
+currentUser &&
+!mine &&
+!ad.sold
+)
 ?
 `
+
 <button
 class="dark"
 onclick=
 "openChat(
-'${x.id}',
-'${esc(x.userId)}',
-'${esc(x.title)}'
+'${ad.id}',
+'${safe(ad.userId)}',
+'${safe(ad.title)}'
 )">
+
 💬 Chat
+
 </button>
+
 `
 :
 ""
 }
+
 
 ${
 mine
 ?
 `
+
 <button
 class="red"
 onclick=
-"deleteMine('${x.id}')">
+"deleteMyAd('${ad.id}')">
+
 🗑️ Delete
+
 </button>
 
+
 <button
-class="${sold?"green":"red"}"
+class="${ad.sold?"green":"red"}"
 onclick=
-"setSold('${x.id}',${!sold})">
-${sold?"🟢 Available":"🔴 Sold"}
+"changeSold(
+'${ad.id}',
+${!ad.sold}
+)">
+
+${ad.sold?
+"🟢 Available":
+"🔴 Sold"}
+
 </button>
+
 `
 :
 ""
 }
+
 
 </div>
 
@@ -1124,13 +1562,21 @@ ${sold?"🟢 Available":"🔴 Sold"}
 });
 
 
-}catch(x){
+}catch(error){
 
 box.innerHTML=
 `
+
 <div class="card">
-❌ ${esc(x.message)}
+
+❌ اشتہارات load نہیں ہوئے۔
+
+<br><br>
+
+${safe(error.message)}
+
 </div>
+
 `;
 
 }
@@ -1138,35 +1584,42 @@ box.innerHTML=
 };
 
 
-/* OWNER */
+/* =====================================
+   OWNER CHECK
+===================================== */
 
-async function own(id){
+async function isOwner(id){
 
-if(!user)
+if(!currentUser)
 return false;
 
-const s=
+
+const snap=
 await getDoc(
 doc(db,"ads",id)
 );
 
+
 return(
-s.exists() &&
-s.data().userId===user.uid
+snap.exists() &&
+snap.data().userId===
+currentUser.uid
 );
 
 }
 
 
-/* DELETE */
+/* =====================================
+   DELETE MY AD
+===================================== */
 
-window.deleteMine=
-async id=>{
+window.deleteMyAd=
+async function(id){
 
-if(!(await own(id))){
+if(!(await isOwner(id))){
 
 alert(
-"⛔ صرف مالک اپنا اشتہار delete کر سکتا ہے"
+"⛔ صرف اشتہار لگانے والا اسے Delete کر سکتا ہے۔"
 );
 
 return;
@@ -1174,9 +1627,11 @@ return;
 }
 
 
-if(!confirm(
-"Delete کریں؟"
-))
+if(
+!confirm(
+"کیا آپ یہ اشتہار Delete کرنا چاہتے ہیں؟"
+)
+)
 return;
 
 
@@ -1186,16 +1641,17 @@ await deleteDoc(
 doc(db,"ads",id)
 );
 
-loadAds();
-
 alert(
-"🗑️ Delete ہوگیا"
+"🗑️ اشتہار Delete ہوگیا۔"
 );
 
-}catch(x){
+loadAds();
+
+}catch(error){
 
 alert(
-"❌ "+x.message
+"❌ Delete error:\n"+
+error.message
 );
 
 }
@@ -1203,15 +1659,17 @@ alert(
 };
 
 
-/* SOLD */
+/* =====================================
+   SOLD
+===================================== */
 
-window.setSold=
-async(id,v)=>{
+window.changeSold=
+async function(id,status){
 
-if(!(await own(id))){
+if(!(await isOwner(id))){
 
 alert(
-"⛔ صرف مالک status بدل سکتا ہے"
+"⛔ صرف مالک status تبدیل کر سکتا ہے۔"
 );
 
 return;
@@ -1224,16 +1682,19 @@ try{
 await updateDoc(
 doc(db,"ads",id),
 {
-sold:v
+
+sold:status
+
 }
 );
 
 loadAds();
 
-}catch(x){
+}catch(error){
 
 alert(
-"❌ "+x.message
+"❌ Error:\n"+
+error.message
 );
 
 }
@@ -1241,19 +1702,21 @@ alert(
 };
 
 
-/* CHAT */
+/* =====================================
+   CHAT
+===================================== */
 
 window.openChat=
-async(
+async function(
 adId,
 sellerId,
 title
-)=>{
+){
 
-if(!user){
+if(!currentUser){
 
 alert(
-"Login کریں"
+"پہلے Login کریں۔"
 );
 
 return;
@@ -1261,13 +1724,9 @@ return;
 }
 
 
-if(user.uid===sellerId)
-return;
-
-
 const chatId=
 [
-user.uid,
+currentUser.uid,
 sellerId,
 adId
 ]
@@ -1276,9 +1735,13 @@ adId
 
 
 activeChat={
+
 id:chatId,
-sellerId,
-adId
+
+sellerId:sellerId,
+
+adId:adId
+
 };
 
 
@@ -1286,17 +1749,18 @@ await setDoc(
 doc(db,"chats",chatId),
 {
 
-participants:
-[
-user.uid,
+participants:[
+currentUser.uid,
 sellerId
 ],
 
 buyerId:
-user.uid,
+currentUser.uid,
 
+sellerId:
 sellerId,
 
+adId:
 adId,
 
 updatedAt:
@@ -1320,74 +1784,88 @@ $("chatPanel")
 .remove("hidden");
 
 
-if(unsub)
-unsub();
+if(chatUnsubscribe)
+chatUnsubscribe();
 
 
-const q=
+const messagesQuery=
 query(
+
 collection(
 db,
 "chats",
 chatId,
 "messages"
 ),
+
 orderBy(
 "createdAt",
 "asc"
 )
+
 );
 
 
-unsub=
+chatUnsubscribe=
 onSnapshot(
-q,
-s=>{
 
-const b=
+messagesQuery,
+
+snapshot=>{
+
+const box=
 $("chatMessages");
 
-b.innerHTML="";
+box.innerHTML="";
 
 
-s.forEach(
-d=>{
+snapshot.forEach(
+item=>{
 
-const m=d.data();
+const msg=
+item.data();
+
 
 const mine=
-m.senderId===user.uid;
+msg.senderId===
+currentUser.uid;
 
 
-b.innerHTML+=
+box.innerHTML+=
 `
-<div
-class="msg
-${mine?"mine":"theirs"}">
 
-${esc(m.text)}
+<div
+class="message
+${mine?"my-message":"other-message"}">
+
+${safe(msg.text)}
 
 <div class="small">
-${mine?"آپ":esc(m.senderEmail||"")}
+
+${mine?
+"آپ":
+safe(msg.senderEmail||"")}
+
 </div>
 
 </div>
+
 `;
 
 });
 
 
-b.scrollTop=
-b.scrollHeight;
+box.scrollTop=
+box.scrollHeight;
 
 },
 
-e=>{
+error=>{
 
 $("chatMessages")
-.textContent=
-"❌ Chat permission: "+
-e.message;
+.innerHTML=
+"❌ Chat error: "+
+safe(error.message);
 
 }
 
@@ -1396,49 +1874,50 @@ e.message;
 };
 
 
-/* SEND */
+/* =====================================
+   SEND MESSAGE
+===================================== */
 
 window.sendMessage=
-async()=>{
+async function(){
 
-if(!user||!activeChat)
+if(
+!currentUser ||
+!activeChat
+)
 return;
 
 
-const t=
+const text=
 $("chatInput")
 .value
 .trim();
 
 
-if(!t)
+if(!text)
 return;
 
 
 try{
 
 await addDoc(
+
 collection(
 db,
 "chats",
 activeChat.id,
 "messages"
 ),
+
 {
 
-text:t,
+text:text,
 
 senderId:
-user.uid,
+currentUser.uid,
 
 senderEmail:
-user.email,
-
-participants:
-[
-user.uid,
-activeChat.sellerId
-],
+currentUser.email,
 
 adId:
 activeChat.adId,
@@ -1447,16 +1926,18 @@ createdAt:
 serverTimestamp()
 
 }
+
 );
 
 
 $("chatInput").value="";
 
 
-}catch(x){
+}catch(error){
 
 alert(
-"❌ "+x.message
+"❌ Message نہیں گیا:\n"+
+error.message
 );
 
 }
@@ -1464,16 +1945,18 @@ alert(
 };
 
 
-/* CLOSE CHAT */
+/* =====================================
+   CLOSE CHAT
+===================================== */
 
 window.closeChat=
-()=>{
+function(){
 
-if(unsub){
+if(chatUnsubscribe){
 
-unsub();
+chatUnsubscribe();
 
-unsub=null;
+chatUnsubscribe=null;
 
 }
 
@@ -1486,30 +1969,45 @@ $("chatPanel")
 };
 
 
-/* ADMIN */
+/* =====================================
+   ADMIN
+===================================== */
 
 window.openAdmin=
-()=>{
+function(){
 
-if(!admin())
+if(!isAdmin()){
+
+alert(
+"⛔ صرف Admin کے لیے۔"
+);
+
 return;
+
+}
+
 
 $("adminPanel")
 .classList
 .remove("hidden");
+
 
 loadAdmin();
 
 };
 
 
+/* =====================================
+   ADMIN LOAD
+===================================== */
+
 async function loadAdmin(){
 
-if(!admin())
+if(!isAdmin())
 return;
 
 
-const s=
+const snapshot=
 await getDocs(
 collection(db,"ads")
 );
@@ -1521,63 +2019,76 @@ let sold=0;
 
 let featured=0;
 
-let out="";
+let html="";
 
 
-s.forEach(
-d=>{
+snapshot.forEach(
+item=>{
 
-const x=d.data();
+const ad=
+item.data();
 
 total++;
 
-if(x.sold)
+if(ad.sold)
 sold++;
 
-if(x.featured)
+if(ad.featured)
 featured++;
 
 
-out+=
+html+=
 `
 
 <div class="card">
 
 <h3>
-${esc(x.title)}
+${safe(ad.title)}
 </h3>
 
 <p>
-👤 ${esc(x.userEmail||"")}
+👤 ${safe(ad.userEmail||"")}
 </p>
 
 <p>
-Rs. ${Number(x.price||0).toLocaleString()}
+📍 ${safe(ad.city||"")}
 </p>
 
 <p>
-${x.sold?"🔴 SOLD":"🟢 Available"}
+💰 Rs.
+${Number(ad.price||0)
+.toLocaleString()}
 </p>
+
+<p>
+${ad.sold?
+"🔴 SOLD":
+"🟢 Available"}
+</p>
+
 
 <button
 class="orange"
 onclick=
-"feature(
-'${d.id}',
-${!!x.featured}
+"adminFeature(
+'${item.id}',
+${!!ad.featured}
 )">
 
 ⭐
-${x.featured?
-"Unfeature":
-"Feature"}
+${ad.featured?
+"Featured ختم کریں":
+"Featured کریں"}
 
 </button>
+
 
 <button
 class="red"
 onclick=
-"adminDelete('${d.id}')">
+"adminDelete(
+'${item.id}'
+)">
 
 🗑️ Delete
 
@@ -1611,59 +2122,100 @@ $("adminStats")
 
 $("adminAds")
 .innerHTML=
-out||
-"کوئی اشتہار نہیں";
+html ||
+`
+<div class="card">
+کوئی اشتہار نہیں۔
+</div>
+`;
 
 }
 
 
-/* FEATURE */
+/* =====================================
+   ADMIN FEATURE
+===================================== */
 
-window.feature=
-async(id,v)=>{
+window.adminFeature=
+async function(id,current){
 
-if(!admin())
+if(!isAdmin())
 return;
 
+
+try{
 
 await updateDoc(
 doc(db,"ads",id),
 {
-featured:!v
+
+featured:!current
+
 }
 );
-
 
 loadAdmin();
 
 loadAds();
 
+}catch(error){
+
+alert(
+"❌ "+error.message
+);
+
+}
+
 };
 
 
-/* ADMIN DELETE */
+/* =====================================
+   ADMIN DELETE
+===================================== */
 
 window.adminDelete=
-async id=>{
+async function(id){
+
+if(!isAdmin())
+return;
+
 
 if(
-!admin() ||
-!confirm("Delete کریں؟")
+!confirm(
+"کیا Admin یہ اشتہار Delete کرے؟"
+)
 )
 return;
 
+
+try{
 
 await deleteDoc(
 doc(db,"ads",id)
 );
 
+alert(
+"🗑️ اشتہار Delete ہوگیا۔"
+);
 
 loadAdmin();
 
 loadAds();
 
+}catch(error){
+
+alert(
+"❌ "+error.message
+);
+
+}
+
 };
 
+
+/* =====================================
+   START
+===================================== */
 
 loadAds();
 
