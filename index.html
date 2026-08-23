@@ -1,1 +1,385 @@
-<html><body>Meena Bazaar 3F</body></html>
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2563eb">
+  <title>Meena Bazaar 3F</title>
+
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,sans-serif;background:#f3f4f6;color:#111}
+    header{background:#2563eb;color:white;padding:18px;text-align:center}
+    header h1{margin:0;font-size:25px}
+    .container{max-width:700px;margin:auto;padding:15px}
+    .search{width:100%;padding:14px;border:1px solid #ddd;border-radius:10px;font-size:16px;margin-bottom:12px}
+    .categories{display:flex;gap:8px;overflow:auto;margin-bottom:15px}
+    .cat{border:0;background:white;padding:10px 15px;border-radius:20px;white-space:nowrap}
+    .cat.active{background:#2563eb;color:white}
+    .card{background:white;border-radius:14px;padding:15px;margin-bottom:12px;box-shadow:0 2px 8px #0001}
+    .card h3{margin:0 0 8px}
+    .price{font-size:20px;font-weight:bold;color:#2563eb}
+    .city{color:#666;margin:7px 0}
+    button{border:0;border-radius:9px;padding:11px 15px;cursor:pointer}
+    .primary{background:#2563eb;color:white}
+    .green{background:#16a34a;color:white}
+    .dark{background:#111827;color:white}
+    .actions{display:flex;gap:8px;margin-top:12px}
+    .actions button{flex:1}
+    .form{background:white;padding:18px;border-radius:14px;margin-top:15px}
+    .form input,.form textarea,.form select{width:100%;padding:12px;margin:7px 0;border:1px solid #ddd;border-radius:9px;font-size:15px}
+    .hidden{display:none}
+    .top-buttons{display:flex;gap:8px;justify-content:center;margin-top:12px}
+    .empty{text-align:center;padding:30px;color:#777}
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🛍️ Meena Bazaar 3F</h1>
+  <p>پرانے اور استعمال شدہ اشیاء کی خرید و فروخت</p>
+
+  <div class="top-buttons">
+    <button class="primary" onclick="showForm()">＋ اشتہار لگائیں</button>
+    <button class="dark" onclick="login()">👤 Login</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <input id="search" class="search"
+         placeholder="🔍 چیز تلاش کریں..."
+         oninput="loadAds()">
+
+  <div class="categories">
+    <button class="cat active" onclick="setCategory('تمام',this)">تمام</button>
+    <button class="cat" onclick="setCategory('موبائل',this)">📱 موبائل</button>
+    <button class="cat" onclick="setCategory('گاڑی',this)">🚗 گاڑی</button>
+    <button class="cat" onclick="setCategory('فرنیچر',this)">🛋️ فرنیچر</button>
+    <button class="cat" onclick="setCategory('الیکٹرانکس',this)">💻 الیکٹرانکس</button>
+    <button class="cat" onclick="setCategory('دیگر',this)">📦 دیگر</button>
+  </div>
+
+  <div id="form" class="form hidden">
+    <h2>نیا اشتہار</h2>
+
+    <input id="title" placeholder="چیز کا نام">
+    
+    <input id="price" type="number" placeholder="قیمت">
+
+    <input id="city" placeholder="شہر">
+
+    <select id="category">
+      <option value="موبائل">📱 موبائل</option>
+      <option value="گاڑی">🚗 گاڑی</option>
+      <option value="فرنیچر">🛋️ فرنیچر</option>
+      <option value="الیکٹرانکس">💻 الیکٹرانکس</option>
+      <option value="دیگر">📦 دیگر</option>
+    </select>
+
+    <textarea id="description"
+              rows="4"
+              placeholder="تفصیل"></textarea>
+
+    <input id="phone"
+           placeholder="موبائل نمبر (مثلاً 03001234567)">
+
+    <button class="primary" onclick="addAd()">اشتہار محفوظ کریں</button>
+    <button onclick="hideForm()">منسوخ</button>
+  </div>
+
+  <div id="ads">
+    <div class="empty">اشتہارات لوڈ ہو رہے ہیں...</div>
+  </div>
+
+</div>
+
+<script type="module">
+
+  import { initializeApp } from
+  "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    serverTimestamp
+  } from
+  "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  import {
+    getAuth,
+    signInWithPopup,
+    GoogleAuthProvider
+  } from
+  "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyA-E7avzWjS9WLRMq6cgR2XA0f3urfsd4Q",
+    authDomain: "meena-bazaar-3f.firebaseapp.com",
+    projectId: "meena-bazaar-3f",
+    storageBucket: "meena-bazaar-3f.firebasestorage.app",
+    messagingSenderId: "95538058106",
+    appId: "1:95538058106:web:c42bf08d9d092b3382fcc3"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const auth = getAuth(app);
+
+  let selectedCategory = "تمام";
+
+  window.showForm = function(){
+    document.getElementById("form").classList.remove("hidden");
+    window.scrollTo(0, document.body.scrollHeight);
+  }
+
+  window.hideForm = function(){
+    document.getElementById("form").classList.add("hidden");
+  }
+
+  window.setCategory = function(category, button){
+    selectedCategory = category;
+
+    document.querySelectorAll(".cat")
+      .forEach(x => x.classList.remove("active"));
+
+    button.classList.add("active");
+
+    loadAds();
+  }
+
+  window.login = async function(){
+
+    try{
+
+      const provider = new GoogleAuthProvider();
+
+      await signInWithPopup(auth, provider);
+
+      alert("Login کامیاب ہوگیا!");
+
+    }catch(error){
+
+      alert("Login میں مسئلہ: " + error.message);
+
+    }
+
+  }
+
+  window.addAd = async function(){
+
+    const title =
+      document.getElementById("title").value.trim();
+
+    const price =
+      document.getElementById("price").value;
+
+    const city =
+      document.getElementById("city").value.trim();
+
+    const category =
+      document.getElementById("category").value;
+
+    const description =
+      document.getElementById("description").value.trim();
+
+    const phone =
+      document.getElementById("phone").value.trim();
+
+
+    if(!title || !price || !city || !phone){
+
+      alert("نام، قیمت، شہر اور موبائل نمبر لازمی ہیں۔");
+      return;
+
+    }
+
+
+    try{
+
+      await addDoc(collection(db,"ads"),{
+
+        title:title,
+        price:Number(price),
+        city:city,
+        category:category,
+        description:description,
+        phone:phone,
+        featured:false,
+        approved:false,
+        createdAt:serverTimestamp()
+
+      });
+
+      alert("اشتہار جمع ہوگیا۔ Admin approval کے بعد دکھایا جائے گا۔");
+
+      document.getElementById("title").value="";
+      document.getElementById("price").value="";
+      document.getElementById("city").value="";
+      document.getElementById("description").value="";
+      document.getElementById("phone").value="";
+
+      hideForm();
+
+      loadAds();
+
+    }catch(error){
+
+      alert("اشتہار محفوظ نہیں ہوا: " + error.message);
+
+    }
+
+  }
+
+
+  window.loadAds = async function(){
+
+    const box = document.getElementById("ads");
+
+    const search =
+      document.getElementById("search").value.toLowerCase();
+
+    box.innerHTML =
+      '<div class="empty">لوڈ ہو رہا ہے...</div>';
+
+
+    try{
+
+      const snapshot =
+        await getDocs(collection(db,"ads"));
+
+      let results=[];
+
+
+      snapshot.forEach(doc => {
+
+        const ad=doc.data();
+
+        if(ad.approved === true){
+
+          const text =
+            ((ad.title || "") + " " +
+             (ad.description || "") + " " +
+             (ad.city || "")).toLowerCase();
+
+          const categoryOK =
+            selectedCategory === "تمام" ||
+            ad.category === selectedCategory;
+
+          const searchOK =
+            !search || text.includes(search);
+
+          if(categoryOK && searchOK){
+
+            results.push(ad);
+
+          }
+
+        }
+
+      });
+
+
+      if(results.length===0){
+
+        box.innerHTML =
+          '<div class="empty">ابھی کوئی منظور شدہ اشتہار موجود نہیں۔</div>';
+
+        return;
+
+      }
+
+
+      box.innerHTML="";
+
+
+      results.forEach(ad => {
+
+        const card=document.createElement("div");
+
+        card.className="card";
+
+        const whatsapp =
+          "https://wa.me/92" +
+          ad.phone.replace(/^0/,"") +
+          "?text=" +
+          encodeURIComponent(
+            "السلام علیکم، میں آپ کے Meena Bazaar 3F والے اشتہار کے بارے میں رابطہ کر رہا ہوں۔"
+          );
+
+
+        card.innerHTML=`
+
+          <h3>${escapeHTML(ad.title)}</h3>
+
+          <div class="price">
+            Rs. ${Number(ad.price).toLocaleString()}
+          </div>
+
+          <div class="city">
+            📍 ${escapeHTML(ad.city)}
+          </div>
+
+          <p>
+            ${escapeHTML(ad.description || "")}
+          </p>
+
+          <div class="actions">
+
+            <a href="tel:${ad.phone}" style="flex:1">
+              <button class="primary" style="width:100%">
+                📞 Call
+              </button>
+            </a>
+
+            <a href="${whatsapp}"
+               target="_blank"
+               style="flex:1">
+              <button class="green" style="width:100%">
+                💬 WhatsApp
+              </button>
+            </a>
+
+          </div>
+
+        `;
+
+        box.appendChild(card);
+
+      });
+
+
+    }catch(error){
+
+      box.innerHTML =
+        '<div class="empty">Database سے رابطہ نہیں ہو سکا۔</div>';
+
+      console.error(error);
+
+    }
+
+  }
+
+
+  function escapeHTML(text){
+
+    return String(text)
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
+
+  }
+
+
+  loadAds();
+
+</script>
+
+</body>
+</html>
