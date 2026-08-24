@@ -6,208 +6,188 @@
 
 <title>Meena Bazaar 3F</title>
 
-<meta name="theme-color" content="#0f766e">
+<script src="https://upload-widget.cloudinary.com/global/all.js"></script>
 
 <style>
 *{box-sizing:border-box}
+
 body{
-  margin:0;
-  font-family:Arial,Tahoma,sans-serif;
-  background:#f4f7f7;
-  color:#222
+margin:0;
+font-family:Arial,Tahoma,sans-serif;
+background:#f1f5f9;
+color:#111827
 }
-button,input,select,textarea{
-  font:inherit
-}
-button{
-  cursor:pointer
-}
+
 header{
-  background:var(--primary,#0f766e);
-  color:white;
-  padding:14px;
-  position:sticky;
-  top:0;
-  z-index:20
+background:linear-gradient(135deg,#2563eb,#1d4ed8);
+color:white;
+padding:22px 15px;
+text-align:center
 }
-.header{
-  max-width:1100px;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px
-}
-.logo{
-  font-size:22px;
-  font-weight:bold
-}
-nav{
-  display:flex;
-  gap:6px;
-  flex-wrap:wrap
-}
-nav button,.header button{
-  border:0;
-  border-radius:8px;
-  padding:8px 12px;
-  background:#ffffff22;
-  color:white
-}
+
+header h1{margin:0 0 8px}
+
 .container{
-  max-width:1100px;
-  margin:auto;
-  padding:15px
+max-width:1000px;
+margin:auto;
+padding:15px
 }
-.hero{
-  background:linear-gradient(135deg,#0f766e,#14b8a6);
-  color:white;
-  border-radius:18px;
-  padding:30px 20px;
-  margin-bottom:18px
-}
-.hero h1{
-  margin:0 0 8px
-}
-.search{
-  display:flex;
-  gap:8px;
-  margin-top:18px
-}
-.search input{
-  flex:1
-}
+
 .card{
-  background:white;
-  border-radius:15px;
-  padding:16px;
-  margin-bottom:15px;
-  box-shadow:0 3px 15px #00000010
+background:white;
+border-radius:15px;
+padding:16px;
+margin:15px 0;
+box-shadow:0 3px 12px rgba(0,0,0,.08)
 }
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:15px
+
+input,textarea,select{
+width:100%;
+padding:13px;
+margin:7px 0;
+border:1px solid #cbd5e1;
+border-radius:10px;
+font-size:15px
 }
-.ad{
-  background:white;
-  border-radius:15px;
-  overflow:hidden;
-  box-shadow:0 3px 12px #00000012
-}
-.ad img{
-  width:100%;
-  height:190px;
-  object-fit:cover
-}
-.ad-body{
-  padding:12px
-}
-.price{
-  color:#0f766e;
-  font-size:20px;
-  font-weight:bold
-}
-.badge{
-  display:inline-block;
-  padding:4px 8px;
-  border-radius:20px;
-  background:#e5f7f4;
-  color:#08766b;
-  font-size:12px;
-  margin:2px
-}
-.featured{
-  border:3px solid #f59e0b
-}
-input,select,textarea{
-  width:100%;
-  border:1px solid #ddd;
-  border-radius:9px;
-  padding:11px;
-  margin:5px 0 10px;
-  background:white
-}
+
 textarea{
-  min-height:100px
+min-height:90px;
+resize:vertical
 }
-.btn{
-  border:0;
-  padding:11px 15px;
-  border-radius:9px;
-  background:var(--primary,#0f766e);
-  color:white;
-  margin:3px
+
+button{
+border:0;
+border-radius:9px;
+padding:11px 15px;
+margin:4px;
+cursor:pointer;
+font-size:14px
 }
-.btn.red{background:#dc2626}
-.btn.orange{background:#ea580c}
-.btn.blue{background:#2563eb}
-.btn.gray{background:#64748b}
-.btn.green{background:#16a34a}
-.hidden{
-  display:none!important
+
+.blue{background:#2563eb;color:white}
+.green{background:#16a34a;color:white}
+.red{background:#dc2626;color:white}
+.dark{background:#111827;color:white}
+.orange{background:#ea580c;color:white}
+.gray{background:#e5e7eb;color:#111827}
+
+.hidden{display:none!important}
+.center{text-align:center}
+
+.row{
+display:flex;
+flex-wrap:wrap;
+gap:5px
 }
-.center{
-  text-align:center
+
+.row>*{
+flex:1;
+min-width:120px
 }
-.small{
-  font-size:13px;
-  color:#666
+
+.categories{
+display:flex;
+gap:5px;
+overflow-x:auto;
+padding-bottom:8px
 }
+
+.categories button{white-space:nowrap}
+
 .gallery{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:6px
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:7px;
+margin-bottom:10px
 }
+
 .gallery img{
-  width:100%;
-  height:90px;
-  object-fit:cover;
-  border-radius:8px
+width:100%;
+height:170px;
+object-fit:cover;
+border-radius:10px
 }
-.banner{
-  background:#111827;
-  color:white;
-  padding:18px;
-  border-radius:15px;
-  margin-bottom:15px
+
+.price{
+font-size:22px;
+font-weight:bold;
+color:#2563eb
 }
+
+.featured{
+border:3px solid #f59e0b
+}
+
+.sold{
+border:3px solid #dc2626;
+opacity:.8
+}
+
+.badge{
+display:inline-block;
+padding:5px 10px;
+border-radius:20px;
+color:white;
+margin-bottom:8px
+}
+
+.featured-badge{background:#f59e0b}
+.sold-badge{background:#dc2626}
+
+.small{
+font-size:13px;
+color:#64748b
+}
+
 .stat{
-  padding:15px;
-  border-radius:12px;
-  background:#f0fdfa;
-  text-align:center
+display:inline-block;
+padding:10px;
+background:#f8fafc;
+border-radius:10px;
+margin:4px
 }
-.stat strong{
-  display:block;
-  font-size:28px;
-  color:#0f766e
+
+.chat-box{
+max-height:400px;
+overflow-y:auto;
+background:#f8fafc;
+padding:10px;
+border-radius:12px
 }
-.chatbox{
-  height:350px;
-  overflow:auto;
-  background:#f8fafc;
-  padding:10px;
-  border-radius:10px
-}
+
 .message{
-  padding:8px 11px;
-  border-radius:12px;
-  background:#e2e8f0;
-  margin:5px;
-  max-width:80%
+padding:9px 12px;
+margin:6px 0;
+border-radius:12px;
+max-width:80%;
+background:#e5e7eb
 }
-.mine{
-  margin-left:auto;
-  background:#ccfbf1
+
+.my-message{
+margin-right:auto;
+background:#dbeafe
 }
-footer{
-  padding:25px;
-  text-align:center;
-  color:#777
+
+.other-message{
+margin-left:auto
 }
-[dir="ltr"]{
-  text-align:left
+
+.upload-status{
+background:#eff6ff;
+padding:10px;
+border-radius:10px;
+margin-top:8px
+}
+
+.admin-box{
+border:2px solid #2563eb;
+border-radius:12px;
+padding:12px;
+margin:10px 0
+}
+
+@media(min-width:700px){
+.gallery{grid-template-columns:repeat(3,1fr)}
 }
 </style>
 </head>
@@ -215,285 +195,267 @@ footer{
 <body>
 
 <header>
-<div class="header">
 
-<div class="logo">🛍️ Meena Bazaar 3F</div>
+<h1>🛍️ Meena Bazaar 3F</h1>
 
-<nav>
-<button onclick="showPage('home')">🏠 <span data-t="home">Home</span></button>
-<button onclick="showPage('post')">➕ <span data-t="post">Post Ad</span></button>
-<button onclick="showPage('profile')">👤 <span data-t="profile">Profile</span></button>
-<button onclick="showPage('admin')" id="adminBtn" class="hidden">🛡️ Admin</button>
-<button onclick="toggleLanguage()">🌐 اردو / English</button>
-<button onclick="logout()" id="logoutBtn" class="hidden">Logout</button>
-</nav>
+<p>خرید و فروخت کا آسان آن لائن بازار</p>
+
+<div id="authButtons">
+
+<button class="blue" onclick="openLogin()">
+👤 Login / Sign Up
+</button>
 
 </div>
+
+<div id="userArea" class="hidden">
+
+<span id="userEmail"></span>
+
+<button class="gray" onclick="logout()">
+Logout
+</button>
+
+</div>
+
+<div id="adminButton" class="hidden">
+
+<button class="orange" onclick="openAdmin()">
+🛡️ Admin Panel
+</button>
+
+</div>
+
 </header>
 
-<main class="container">
+<div class="container">
 
-<!-- HOME -->
-
-<section id="home">
-
-<div id="topBanner" class="banner hidden"></div>
-
-<div class="hero">
-<h1 id="heroTitle">Meena Bazaar 3F</h1>
-<p id="heroSubtitle">
-Buy & Sell Everything Easily
-</p>
-
-<div class="search">
-<input id="searchBox"
-placeholder="Search advertisements..."
-oninput="renderAds()">
-
-<button class="btn" onclick="renderAds()">🔎 Search</button>
-</div>
-</div>
-
-<div class="grid">
+<!-- SEARCH -->
 
 <div class="card">
-<h3>📱 Mobile</h3>
-<p>Mobiles & Accessories</p>
-</div>
 
-<div class="card">
-<h3>🏍️ Vehicles</h3>
-<p>Cars, Bikes & More</p>
-</div>
+<input
+id="search"
+placeholder="🔍 چیز، شہر یا تفصیل تلاش کریں..."
+oninput="loadAds()">
 
-<div class="card">
-<h3>🏠 Property</h3>
-<p>Houses, Shops & Land</p>
-</div>
+<div class="categories">
 
-<div class="card">
-<h3>💼 Jobs</h3>
-<p>Jobs & Services</p>
-</div>
+<button class="gray" onclick="setCategory('تمام')">تمام</button>
+<button class="gray" onclick="setCategory('موبائل')">📱 موبائل</button>
+<button class="gray" onclick="setCategory('گاڑی')">🚗 گاڑی</button>
+<button class="gray" onclick="setCategory('فرنیچر')">🛋️ فرنیچر</button>
+<button class="gray" onclick="setCategory('الیکٹرانکس')">💻 الیکٹرانکس</button>
+<button class="gray" onclick="setCategory('کپڑے')">👕 کپڑے</button>
+<button class="gray" onclick="setCategory('مکان')">🏠 مکان</button>
+<button class="gray" onclick="setCategory('دیگر')">📦 دیگر</button>
 
 </div>
-
-<h2 data-t="latest">Latest Advertisements</h2>
-
-<div id="adsGrid" class="grid"></div>
-
-</section>
-
+</div>
 
 <!-- LOGIN -->
 
-<section id="login" class="hidden">
-
-<div class="card">
+<div id="loginPanel" class="card hidden">
 
 <h2>🔐 Login / Sign Up</h2>
 
-<button class="btn blue"
-onclick="googleLogin()">
-🇬🇧 Google / Gmail
+<button class="blue" onclick="googleLogin()">
+🇬🇧 Google / Gmail سے Login
 </button>
 
 <hr>
 
-<h3>Email</h3>
+<h3>📧 Email</h3>
 
-<input id="email"
-type="email"
-placeholder="Email">
+<input id="email" type="email" placeholder="Email">
 
-<input id="password"
-type="password"
-placeholder="Password">
+<input id="password" type="password" placeholder="Password">
 
-<button class="btn"
-onclick="emailLogin()">
+<button class="blue" onclick="emailLogin()">
 Login
 </button>
 
-<button class="btn green"
-onclick="emailSignup()">
-Create Account
+<button class="green" onclick="emailSignup()">
+نیا Account
 </button>
 
 <hr>
 
 <h3>📱 Mobile OTP</h3>
 
-<input id="phone"
-placeholder="+92xxxxxxxxxx">
+<input id="phoneAuth" placeholder="+923xxxxxxxxx">
 
 <div id="recaptcha-container"></div>
 
-<button class="btn orange"
-onclick="sendOTP()">
-Send OTP
+<button class="orange" onclick="sendOTP()">
+OTP بھیجیں
 </button>
 
-<input id="otp"
-placeholder="6 digit OTP">
+<input id="otp" placeholder="6 digit OTP">
 
-<button class="btn green"
-onclick="verifyOTP()">
-Verify OTP
+<button class="green" onclick="verifyOTP()">
+OTP Verify کریں
 </button>
 
 <p id="loginStatus" class="small"></p>
 
 </div>
 
-</section>
+<!-- ADD -->
 
+<div class="center">
 
-<!-- POST AD -->
+<button class="blue" onclick="showAdForm()">
+＋ اپنا اشتہار لگائیں
+</button>
 
-<section id="post" class="hidden">
+</div>
+
+<!-- ADD FORM -->
+
+<div id="adForm" class="card hidden">
+
+<h2>📢 نیا اشتہار لگائیں</h2>
+
+<p class="small">
+فی الحال تمام اشتہارات مفت ہیں۔
+</p>
+
+<input id="title" placeholder="چیز کا نام *">
+
+<input id="price" type="number" min="0" placeholder="قیمت *">
+
+<input id="city" placeholder="شہر *">
+
+<select id="category">
+
+<option value="موبائل">📱 موبائل</option>
+<option value="گاڑی">🚗 گاڑی</option>
+<option value="فرنیچر">🛋️ فرنیچر</option>
+<option value="الیکٹرانکس">💻 الیکٹرانکس</option>
+<option value="کپڑے">👕 کپڑے</option>
+<option value="مکان">🏠 مکان</option>
+<option value="دیگر">📦 دیگر</option>
+
+</select>
+
+<textarea
+id="description"
+placeholder="چیز کی مکمل تفصیل *"></textarea>
+
+<input id="phone" placeholder="موبائل / WhatsApp نمبر *">
 
 <div class="card">
 
-<h2>➕ <span data-t="post">Post Advertisement</span></h2>
+<h3>📸 تصاویر</h3>
 
-<input id="adTitle"
-placeholder="Advertisement Title">
+<p class="small">
+اپنے موبائل سے ایک یا کئی تصاویر منتخب کریں۔
+</p>
 
-<textarea id="adDescription"
-placeholder="Description"></textarea>
+<button class="green" onclick="openUploader()">
+📷 تصویر / تصاویر Upload کریں
+</button>
 
-<input id="adPrice"
-type="number"
-placeholder="Price">
+<div id="uploadStatus" class="upload-status hidden"></div>
 
-<select id="adCategory">
-<option value="Mobile">Mobile</option>
-<option value="Vehicle">Vehicle</option>
-<option value="Property">Property</option>
-<option value="Electronics">Electronics</option>
-<option value="Jobs">Jobs</option>
-<option value="Other">Other</option>
-</select>
+<div id="preview" class="gallery"></div>
 
-<input id="adCity"
-placeholder="City">
+</div>
 
-<input id="adPhone"
-placeholder="Phone / WhatsApp">
+<select id="plan">
 
-<select id="adPlan">
 <option value="free">
 Free Advertisement — Rs. 0
 </option>
 
 <option value="featured">
-Featured Advertisement
+Featured Advertisement — ابھی Free
 </option>
+
 </select>
 
-<h3>📸 Images</h3>
+<p class="small">
+💰 ابھی payment نہیں لی جا رہی۔
+</p>
 
-<button class="btn green"
-onclick="openCloudinary()">
-📷 Upload Images
+<button class="blue" onclick="addAd()">
+📢 اشتہار Publish کریں
 </button>
 
-<div id="preview" class="gallery"></div>
-
-<p id="uploadStatus" class="small"></p>
-
-<button class="btn"
-onclick="createAd()">
-📢 Submit Advertisement
+<button class="gray" onclick="hideAdForm()">
+Cancel
 </button>
 
 </div>
 
-</section>
+<!-- ADS -->
 
+<h2>🔥 تازہ اشتہارات</h2>
+
+<div id="ads">
+لوڈ ہو رہا ہے...
+</div>
+
+<!-- CHAT -->
+
+<div id="chatPanel" class="card hidden">
+
+<h2 id="chatTitle">💬 Chat</h2>
+
+<div id="chatMessages" class="chat-box"></div>
+
+<textarea id="chatInput" placeholder="پیغام لکھیں..."></textarea>
+
+<button class="blue" onclick="sendMessage()">
+📤 Send
+</button>
+
+<button class="gray" onclick="closeChat()">
+بند کریں
+</button>
+
+</div>
 
 <!-- PROFILE -->
 
-<section id="profile" class="hidden">
+<div id="profilePanel" class="card hidden">
 
-<div class="card">
-
-<h2>👤 Profile</h2>
+<h2>👤 میرا پروفائل</h2>
 
 <div id="profileInfo"></div>
 
-<h3>My Advertisements</h3>
+<h3>میرے اشتہارات</h3>
 
-<div id="myAds" class="grid"></div>
+<div id="myAds"></div>
 
 </div>
-
-</section>
-
 
 <!-- ADMIN -->
 
-<section id="admin" class="hidden">
+<div id="adminPanel" class="card hidden">
 
-<div class="card">
+<h2>🛡️ Admin Panel</h2>
 
-<h2>🛡️ Admin Dashboard</h2>
+<div id="adminStats"></div>
 
-<div class="grid">
+<div class="admin-box">
 
-<div class="stat">
-<strong id="totalUsers">0</strong>
-Users
-</div>
-
-<div class="stat">
-<strong id="totalAds">0</strong>
-Ads
-</div>
-
-<div class="stat">
-<strong id="pendingAds">0</strong>
-Pending
-</div>
-
-<div class="stat">
-<strong id="paidAds">0</strong>
-Payments
-</div>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h2>📢 Advertisement Management</h2>
-
-<div id="adminAds"></div>
-
-</div>
-
-
-<div class="card">
-
-<h2>👥 Admin Management</h2>
+<h3>👥 Admin Management</h3>
 
 <p class="small">
-صرف Main Admin کسی دوسرے user کو Admin بنا سکتا ہے یا Admin ختم کر سکتا ہے۔
+Main Admin کسی registered user کو Admin بنا سکتا ہے۔
 </p>
 
-<input id="adminEmail"
-placeholder="Registered user's Email">
+<input
+id="adminEmail"
+placeholder="User کا registered Email">
 
-<button class="btn green"
-onclick="makeAdmin()">
+<button class="green" onclick="makeAdmin()">
 ➕ Make Admin
 </button>
 
-<button class="btn red"
-onclick="removeAdmin()">
+<button class="red" onclick="removeAdmin()">
 ➖ Remove Admin
 </button>
 
@@ -501,494 +463,216 @@ onclick="removeAdmin()">
 
 </div>
 
+<div class="admin-box">
 
-<div class="card">
+<h3>📢 Advertisement Management</h3>
 
-<h2>🎨 App Settings</h2>
+<div id="adminAds"></div>
 
-<input id="settingTitle"
-placeholder="App Title">
+</div>
 
-<input id="settingSubtitle"
-placeholder="App Subtitle">
+<div class="admin-box">
 
-<input id="settingBanner"
-placeholder="Promotional Banner">
+<h3>🎨 App Settings</h3>
 
-<input id="settingColor"
-type="color"
-value="#0f766e">
+<input id="settingTitle" placeholder="App Title">
 
-<button class="btn"
-onclick="saveSettings()">
-💾 Save Settings
+<input id="settingSubtitle" placeholder="Subtitle">
+
+<input id="settingBanner" placeholder="Banner / Announcement">
+
+<input id="settingColor" type="color" value="#2563eb">
+
+<button class="blue" onclick="saveSettings()">
+💾 Settings Save
 </button>
 
 </div>
 
+<div class="admin-box">
 
-<div class="card">
-
-<h2>💰 Payment Settings</h2>
+<h3>💰 Payment Settings</h3>
 
 <select id="paymentMethod">
-<option>Manual Payment</option>
-<option>JazzCash</option>
-<option>Easypaisa</option>
-<option>Bank Transfer</option>
+
+<option value="Manual Payment">Manual Payment</option>
+<option value="JazzCash">JazzCash</option>
+<option value="Easypaisa">Easypaisa</option>
+<option value="Bank Transfer">Bank Transfer</option>
+
 </select>
 
-<input id="paymentNumber"
-placeholder="Payment Account / Number">
+<input id="paymentNumber" placeholder="Account / Number">
 
-<button class="btn"
-onclick="savePaymentSettings()">
-Save Payment Settings
+<button class="green" onclick="savePaymentSettings()">
+💾 Payment Save
 </button>
 
 </div>
 
-</section>
-
-
-<!-- CHAT -->
-
-<section id="chat" class="hidden">
-
-<div class="card">
-
-<h2>💬 Private Chat</h2>
-
-<div id="chatMessages" class="chatbox"></div>
-
-<input id="chatInput"
-placeholder="Write message...">
-
-<button class="btn"
-onclick="sendMessage()">
-Send
-</button>
-
 </div>
 
-</section>
-
-</main>
-
-
-<footer>
-© 2026 Meena Bazaar 3F
-</footer>
-
-
-<!-- CLOUDINARY -->
-
-<script src="https://upload-widget.cloudinary.com/global/all.js"></script>
-
-
-<!-- FIREBASE -->
+</div>
 
 <script type="module">
 
 import {
- initializeApp
+initializeApp
 }
 from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
- getAuth,
- GoogleAuthProvider,
- signInWithPopup,
- createUserWithEmailAndPassword,
- signInWithEmailAndPassword,
- signOut,
- onAuthStateChanged,
- RecaptchaVerifier,
- signInWithPhoneNumber
+getFirestore,
+collection,
+addDoc,
+getDocs,
+doc,
+getDoc,
+setDoc,
+updateDoc,
+deleteDoc,
+onSnapshot,
+query,
+orderBy,
+serverTimestamp,
+where
 }
 from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 import {
- getFirestore,
- collection,
- addDoc,
- getDocs,
- getDoc,
- doc,
- setDoc,
- updateDoc,
- deleteDoc,
- query,
- where,
- orderBy,
- serverTimestamp
+getAuth,
+GoogleAuthProvider,
+signInWithPopup,
+signInWithEmailAndPassword,
+createUserWithEmailAndPassword,
+signInWithPhoneNumber,
+RecaptchaVerifier,
+onAuthStateChanged,
+signOut
 }
 from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
-/* =====================================
-   🔥 PASTE YOUR FIREBASE CONFIG HERE
-===================================== */
+/* =========================
+   FIREBASE
+========================= */
 
-const firebaseConfig = {
+const firebaseConfig={
 
-  apiKey:
-  "PASTE_YOUR_API_KEY",
+apiKey:
+"AIzaSyA-E7avzWjS9WLRMq6cgR2XA0f3urfsd4Q",
 
-  authDomain:
-  "PASTE_YOUR_PROJECT.firebaseapp.com",
+authDomain:
+"meena-bazaar-3f.firebaseapp.com",
 
-  projectId:
-  "PASTE_YOUR_PROJECT_ID",
+projectId:
+"meena-bazaar-3f",
 
-  storageBucket:
-  "PASTE_YOUR_STORAGE_BUCKET",
+storageBucket:
+"meena-bazaar-3f.firebasestorage.app",
 
-  messagingSenderId:
-  "PASTE_YOUR_SENDER_ID",
+messagingSenderId:
+"95538058106",
 
-  appId:
-  "PASTE_YOUR_APP_ID"
+appId:
+"1:95538058106:web:c42bf08d9d092b3382fcc3"
 
 };
 
+const app=initializeApp(firebaseConfig);
 
-const app =
-initializeApp(firebaseConfig);
+const db=getFirestore(app);
 
-const auth =
-getAuth(app);
-
-const db =
-getFirestore(app);
+const auth=getAuth(app);
 
 
-/* =====================================
+/* =========================
    CLOUDINARY
-===================================== */
+========================= */
 
-const CLOUD_NAME =
-"b3roqofo";
+const CLOUD_NAME="b3roqofo";
 
-const UPLOAD_PRESET =
-"Meena Bazaar 3F";
+const UPLOAD_PRESET="Meena Bazaar 3F";
 
 
-let uploadedImages = [];
-
-let currentUser = null;
-
-let currentChatId = null;
-
-let confirmationResult = null;
-
-
-/* =====================================
+/* =========================
    MAIN ADMIN
-===================================== */
+========================= */
 
-const MAIN_ADMIN =
+const MAIN_ADMIN=
 "muslimabdulwajid51@gmail.com";
 
 
-/* =====================================
-   LANGUAGE
-===================================== */
+let currentUser=null;
+let selectedCategory="تمام";
+let uploadedImages=[];
+let confirmationResult=null;
+let activeChat=null;
+let chatUnsubscribe=null;
 
-let language =
-localStorage.getItem("language") || "ur";
 
+/* =========================
+   HELPER
+========================= */
 
-const translations = {
-
-ur:{
-home:"ہوم",
-post:"اشتہار لگائیں",
-profile:"پروفائل",
-latest:"تازہ اشتہارات"
-},
-
-en:{
-home:"Home",
-post:"Post Ad",
-profile:"Profile",
-latest:"Latest Advertisements"
+function $(id){
+return document.getElementById(id);
 }
 
-};
+function safe(value){
 
-
-window.toggleLanguage =
-function(){
-
-language =
-language === "ur"
-? "en"
-: "ur";
-
-localStorage.setItem(
-"language",
-language
-);
-
-document.documentElement.dir =
-language === "ur"
-? "rtl"
-: "ltr";
-
-document.documentElement.lang =
-language;
-
-document.querySelectorAll(
-"[data-t]"
-).forEach(el=>{
-
-const key =
-el.getAttribute("data-t");
-
-el.textContent =
-translations[language][key];
-
-});
-
-};
-
-
-/* =====================================
-   PAGE
-===================================== */
-
-window.showPage =
-function(page){
-
-document.querySelectorAll(
-"main section"
-).forEach(x=>
-x.classList.add("hidden")
-);
-
-if(page==="post" &&
-!currentUser){
-
-document.getElementById("login")
-.classList.remove("hidden");
-
-return;
-}
-
-document.getElementById(page)
-.classList.remove("hidden");
-
-if(page==="home")
-renderAds();
-
-if(page==="profile")
-loadProfile();
-
-if(page==="admin")
-loadAdmin();
-
-};
-
-
-/* =====================================
-   LOGIN
-===================================== */
-
-window.googleLogin =
-async function(){
-
-try{
-
-const provider =
-new GoogleAuthProvider();
-
-const result =
-await signInWithPopup(
-auth,
-provider
-);
-
-await createUserDoc(
-result.user
-);
-
-showPage("home");
-
-}catch(e){
-
-alert(e.message);
+return String(value??"")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
 
 }
 
-};
 
+/* =========================
+   ADMIN CHECK
+========================= */
 
-window.emailSignup =
-async function(){
+async function isAdmin(){
 
-try{
+if(!currentUser)
+return false;
 
-const email =
-document.getElementById("email")
-.value.trim();
+if(
+currentUser.email &&
+currentUser.email.toLowerCase()
+===
+MAIN_ADMIN.toLowerCase()
+)
+return true;
 
-const password =
-document.getElementById("password")
-.value;
-
-const result =
-await createUserWithEmailAndPassword(
-auth,
-email,
-password
+const snap=
+await getDoc(
+doc(db,"users",currentUser.uid)
 );
 
-await createUserDoc(
-result.user
-);
-
-alert("Account created");
-
-showPage("home");
-
-}catch(e){
-
-alert(e.message);
+return snap.exists()
+&&
+snap.data().role==="admin";
 
 }
 
-};
 
-
-window.emailLogin =
-async function(){
-
-try{
-
-const email =
-document.getElementById("email")
-.value.trim();
-
-const password =
-document.getElementById("password")
-.value;
-
-const result =
-await signInWithEmailAndPassword(
-auth,
-email,
-password
-);
-
-await createUserDoc(
-result.user
-);
-
-showPage("home");
-
-}catch(e){
-
-alert(e.message);
-
-}
-
-};
-
-
-/* =====================================
-   PHONE OTP
-===================================== */
-
-window.sendOTP =
-async function(){
-
-try{
-
-if(!window.recaptchaVerifier){
-
-window.recaptchaVerifier =
-new RecaptchaVerifier(
-auth,
-"recaptcha-container",
-{
-size:"normal"
-}
-);
-
-}
-
-const phone =
-document.getElementById("phone")
-.value.trim();
-
-confirmationResult =
-await signInWithPhoneNumber(
-auth,
-phone,
-window.recaptchaVerifier
-);
-
-document.getElementById(
-"loginStatus"
-).textContent =
-"OTP sent.";
-
-}catch(e){
-
-alert(e.message);
-
-}
-
-};
-
-
-window.verifyOTP =
-async function(){
-
-try{
-
-const code =
-document.getElementById("otp")
-.value.trim();
-
-const result =
-await confirmationResult.confirm(
-code
-);
-
-await createUserDoc(
-result.user
-);
-
-showPage("home");
-
-}catch(e){
-
-alert(e.message);
-
-}
-
-};
-
-
-/* =====================================
-   USER DOCUMENT
-===================================== */
+/* =========================
+   USER DOC
+========================= */
 
 async function createUserDoc(user){
 
-const ref =
-doc(
-db,
-"users",
-user.uid
-);
+const ref=
+doc(db,"users",user.uid);
 
-const snap =
+const snap=
 await getDoc(ref);
 
 if(!snap.exists()){
@@ -997,13 +681,21 @@ await setDoc(ref,{
 
 uid:user.uid,
 
-email:user.email || "",
+email:user.email||"",
 
-phone:user.phoneNumber || "",
+phone:user.phoneNumber||"",
 
-name:user.displayName || "User",
+name:user.displayName||"User",
 
-role:"user",
+role:
+user.email &&
+user.email.toLowerCase()
+===
+MAIN_ADMIN.toLowerCase()
+?
+"admin"
+:
+"user",
 
 createdAt:
 serverTimestamp()
@@ -1015,111 +707,358 @@ serverTimestamp()
 }
 
 
-/* =====================================
+/* =========================
    AUTH STATE
-===================================== */
+========================= */
 
 onAuthStateChanged(
 auth,
 async user=>{
 
-currentUser =
-user;
+currentUser=user;
+
+$("authButtons")
+.classList
+.toggle("hidden",!!user);
+
+$("userArea")
+.classList
+.toggle("hidden",!user);
 
 if(user){
 
-document.getElementById(
-"logoutBtn"
-)
-.classList.remove("hidden");
+$("userEmail")
+.textContent=
+user.email ||
+user.phoneNumber ||
+"User";
 
 await createUserDoc(user);
 
-const userSnap =
-await getDoc(
-doc(db,"users",user.uid)
-);
+if(await isAdmin()){
 
-const data =
-userSnap.data() || {};
+$("adminButton")
+.classList
+.remove("hidden");
 
-if(
-user.email === MAIN_ADMIN ||
-data.role === "admin"
-){
+}else{
 
-document.getElementById(
-"adminBtn"
-)
-.classList.remove("hidden");
+$("adminButton")
+.classList
+.add("hidden");
 
 }
 
 }else{
 
-document.getElementById(
-"logoutBtn"
-)
-.classList.add("hidden");
-
-document.getElementById(
-"adminBtn"
-)
-.classList.add("hidden");
+$("adminButton")
+.classList
+.add("hidden");
 
 }
 
-renderAds();
+loadAds();
 
 });
 
 
-window.logout =
-async function(){
+/* =========================
+   LOGIN PANEL
+========================= */
 
-await signOut(auth);
+window.openLogin=function(){
 
-showPage("home");
+$("loginPanel")
+.classList
+.toggle("hidden");
 
 };
 
 
-/* =====================================
-   CLOUDINARY UPLOAD
-===================================== */
+/* =========================
+   GOOGLE
+========================= */
 
-window.openCloudinary =
-function(){
+window.googleLogin=async function(){
+
+try{
+
+const provider=
+new GoogleAuthProvider();
+
+const result=
+await signInWithPopup(
+auth,
+provider
+);
+
+await createUserDoc(result.user);
+
+$("loginPanel")
+.classList.add("hidden");
+
+alert("✅ Google Login کامیاب");
+
+}catch(e){
+
+alert("❌ "+e.message);
+
+}
+
+};
+
+
+/* =========================
+   EMAIL LOGIN
+========================= */
+
+window.emailLogin=async function(){
+
+try{
+
+const email=
+$("email").value.trim();
+
+const password=
+$("password").value;
+
+await signInWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+$("loginPanel").classList.add("hidden");
+
+alert("✅ Login کامیاب");
+
+}catch(e){
+
+alert("❌ "+e.message);
+
+}
+
+};
+
+
+/* =========================
+   EMAIL SIGNUP
+========================= */
+
+window.emailSignup=async function(){
+
+try{
+
+const email=
+$("email").value.trim();
+
+const password=
+$("password").value;
+
+if(password.length<6){
+
+alert("Password کم از کم 6 حروف کا ہونا چاہیے");
+
+return;
+
+}
+
+const result=
+await createUserWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+await createUserDoc(result.user);
+
+$("loginPanel").classList.add("hidden");
+
+alert("🎉 Account بن گیا");
+
+}catch(e){
+
+alert("❌ "+e.message);
+
+}
+
+};
+
+
+/* =========================
+   PHONE OTP
+========================= */
+
+window.sendOTP=async function(){
+
+try{
+
+const phone=
+$("phoneAuth").value.trim();
+
+if(!phone){
+
+alert("Phone number لکھیں");
+
+return;
+
+}
+
+if(!window.recaptchaVerifier){
+
+window.recaptchaVerifier=
+new RecaptchaVerifier(
+auth,
+"recaptcha-container",
+{
+size:"normal"
+}
+);
+
+}
+
+confirmationResult=
+await signInWithPhoneNumber(
+auth,
+phone,
+window.recaptchaVerifier
+);
+
+$("loginStatus")
+.textContent=
+"✅ OTP آپ کے موبائل پر بھیج دیا گیا۔";
+
+}catch(e){
+
+console.error(e);
+
+$("loginStatus")
+.textContent=
+"❌ "+e.message;
+
+}
+
+};
+
+
+/* =========================
+   VERIFY OTP
+========================= */
+
+window.verifyOTP=async function(){
+
+try{
+
+if(!confirmationResult){
+
+alert("پہلے OTP بھیجیں");
+
+return;
+
+}
+
+const code=
+$("otp").value.trim();
+
+const result=
+await confirmationResult.confirm(code);
+
+await createUserDoc(result.user);
+
+$("loginPanel").classList.add("hidden");
+
+alert("✅ Mobile verification کامیاب");
+
+}catch(e){
+
+alert("❌ OTP غلط ہے یا expired ہے۔");
+
+}
+
+};
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+window.logout=async function(){
+
+await signOut(auth);
+
+};
+
+
+/* =========================
+   AD FORM
+========================= */
+
+window.showAdForm=function(){
 
 if(!currentUser){
 
-alert("Please login first.");
+alert("⚠️ پہلے Login کریں۔");
+
+$("loginPanel")
+.classList
+.remove("hidden");
 
 return;
+
 }
 
-cloudinary.openUploadWidget(
+$("adForm")
+.classList
+.remove("hidden");
+
+};
+
+window.hideAdForm=function(){
+
+$("adForm")
+.classList
+.add("hidden");
+
+};
+
+
+/* =========================
+   CLOUDINARY
+========================= */
+
+window.openUploader=function(){
+
+if(!currentUser){
+
+alert("پہلے Login کریں۔");
+
+return;
+
+}
+
+const widget=
+cloudinary.createUploadWidget(
 
 {
 
-cloudName:
-CLOUD_NAME,
+cloudName:CLOUD_NAME,
 
-uploadPreset:
-UPLOAD_PRESET,
+uploadPreset:UPLOAD_PRESET,
 
 multiple:true,
 
-maxFiles:8,
+maxFiles:10,
+
+sources:["local","camera"],
 
 resourceType:"image",
 
-clientAllowedFormats:[
-"jpg",
-"jpeg",
-"png",
-"webp"
-]
+clientAllowedFormats:
+["jpg","jpeg","png","webp"],
+
+maxFileSize:10000000,
+
+folder:"meena_bazaar_3f"
 
 },
 
@@ -1134,598 +1073,783 @@ return;
 }
 
 if(
-result.event === "success"
+result &&
+result.event==="success"
 ){
 
 uploadedImages.push(
 result.info.secure_url
 );
 
-renderPreview();
+showPreview();
+
+$("uploadStatus")
+.classList
+.remove("hidden");
+
+$("uploadStatus")
+textContent=
+"✅ "+
+uploadedImages.length+
+" تصاویر upload ہوگئیں۔";
 
 }
-
-}
-
-);
-
-};
-
-
-function renderPreview(){
-
-document.getElementById(
-"preview"
-).innerHTML =
-uploadedImages.map(
-url =>
-`<img src="${url}">`
-).join("");
-
-}
-
-
-/* =====================================
-   CREATE AD
-===================================== */
-
-window.createAd =
-async function(){
-
-if(!currentUser){
-
-alert("Login required.");
-
-return;
-
-}
-
-const title =
-document.getElementById("adTitle")
-.value.trim();
-
-if(!title){
-
-alert("Title required.");
-
-return;
-
-}
-
-const plan =
-document.getElementById("adPlan")
-.value;
-
-await addDoc(
-collection(db,"ads"),
-{
-
-userId:
-currentUser.uid,
-
-title:title,
-
-description:
-document.getElementById(
-"adDescription"
-).value,
-
-price:
-Number(
-document.getElementById(
-"adPrice"
-).value
-),
-
-category:
-document.getElementById(
-"adCategory"
-).value,
-
-city:
-document.getElementById(
-"adCity"
-).value,
-
-phone:
-document.getElementById(
-"adPhone"
-).value,
-
-images:
-uploadedImages,
-
-plan:plan,
-
-featured:
-plan === "featured",
-
-approved:false,
-
-rejected:false,
-
-paymentStatus:
-plan === "free"
-? "free"
-: "pending",
-
-sold:false,
-
-createdAt:
-serverTimestamp()
 
 });
 
-alert(
-"Advertisement submitted for Admin approval."
-);
-
-uploadedImages=[];
-
-document.getElementById(
-"preview"
-).innerHTML="";
-
-showPage("home");
+widget.open();
 
 };
 
 
-/* =====================================
-   LOAD ADS
-===================================== */
+/* =========================
+   PREVIEW
+========================= */
 
-async function getAds(){
+function showPreview(){
 
-const snap =
-await getDocs(
-collection(db,"ads")
-);
-
-return snap.docs.map(
-d => ({
-id:d.id,
-...d.data()
-})
-);
-
-}
-
-
-window.renderAds =
-async function(){
-
-const grid =
-document.getElementById(
-"adsGrid"
-);
-
-grid.innerHTML =
-"<p>Loading...</p>";
-
-try{
-
-const ads =
-await getAds();
-
-const search =
-document.getElementById(
-"searchBox"
-).value
-.toLowerCase();
-
-const visible =
-ads
-.filter(ad =>
-ad.approved === true
-&&
-ad.rejected !== true
-)
-.filter(ad =>
-(
-ad.title ||
-""
-)
-.toLowerCase()
-.includes(search)
-||
-(
-ad.city ||
-""
-)
-.toLowerCase()
-.includes(search)
-);
-
-visible.sort(
-(a,b)=>
-Number(b.featured) -
-Number(a.featured)
-);
-
-grid.innerHTML =
-visible.map(
-adCard
-).join("");
-
-}catch(e){
-
-grid.innerHTML =
-"<p>Error loading ads.</p>";
-
-}
-
-};
-
-
-function adCard(ad){
-
-const image =
-ad.images &&
-ad.images.length
-? ad.images[0]
-: "https://via.placeholder.com/500x300?text=Meena+Bazaar";
-
-return `
-
-<div class="ad ${
-ad.featured ? "featured" : ""
-}">
-
-<img src="${image}">
-
-<div class="ad-body">
-
-${ad.featured
-? `<span class="badge">⭐ Featured</span>`
-: ""}
-
-<h3>${escapeHtml(ad.title)}</h3>
-
-<div class="price">
-Rs. ${Number(ad.price||0).toLocaleString()}
-</div>
-
-<p>${escapeHtml(ad.city||"")}</p>
-
-<span class="badge">
-${escapeHtml(ad.category||"")}
-</span>
-
-<p class="small">
-${escapeHtml(
-(ad.description||"")
-.substring(0,100)
-)}
-</p>
-
-<button class="btn"
-onclick="contactSeller('${ad.phone||""}')">
-☎️ Call
-</button>
-
-<button class="btn green"
-onclick="whatsapp('${ad.phone||""}')">
-WhatsApp
-</button>
-
-${
-currentUser &&
-currentUser.uid !== ad.userId
-?
-`<button class="btn blue"
-onclick="startChat('${ad.userId}','${ad.title}')">
-💬 Chat
-</button>`
-:""
-}
-
-</div>
-</div>
-
-`;
-
-}
-
-
-function escapeHtml(str){
-
-return String(str)
-.replaceAll("&","&amp;")
-.replaceAll("<","&lt;")
-.replaceAll(">","&gt;")
-.replaceAll('"',"&quot;")
-.replaceAll("'","&#039;");
-
-}
-
-
-window.contactSeller =
-function(phone){
-
-location.href =
-"tel:"+phone;
-
-};
-
-
-window.whatsapp =
-function(phone){
-
-const clean =
-phone.replace(/\D/g,"");
-
-window.open(
-"https://wa.me/"+clean,
-"_blank"
-);
-
-};
-
-
-/* =====================================
-   PROFILE
-===================================== */
-
-async function loadProfile(){
-
-if(!currentUser)
-return;
-
-const user =
-await getDoc(
-doc(
-db,
-"users",
-currentUser.uid
-)
-);
-
-const data =
-user.data() || {};
-
-document.getElementById(
-"profileInfo"
-).innerHTML = `
-
-<p><b>Email:</b>
-${escapeHtml(data.email||"")}</p>
-
-<p><b>Phone:</b>
-${escapeHtml(data.phone||"")}</p>
-
-<p><b>Role:</b>
-${escapeHtml(data.role||"user")}</p>
-
-`;
-
-const snap =
-await getDocs(
-query(
-collection(db,"ads"),
-where(
-"userId",
-"==",
-currentUser.uid
-)
-)
-);
-
-document.getElementById(
-"myAds"
-).innerHTML =
-snap.docs
-.map(d=>({
-id:d.id,
-...d.data()
-}))
+$("preview").innerHTML=
+uploadedImages
 .map(
-ad=>
-adCard(ad)+
+(url,index)=>
 `
-<div class="card">
-<button class="btn red"
-onclick="deleteAd('${ad.id}')">
-Delete
+
+<div style="position:relative">
+
+<img
+src="${safe(url)}">
+
+<button
+class="red"
+style="position:absolute;top:5px;left:5px"
+onclick="removeImage(${index})">
+
+✕
+
 </button>
 
-<button class="btn"
-onclick="markSold('${ad.id}')">
-Mark Sold
-</button>
 </div>
+
 `
 )
 .join("");
 
 }
 
+window.removeImage=function(index){
 
-window.deleteAd =
-async function(id){
+uploadedImages.splice(index,1);
 
-if(!confirm("Delete this advertisement?"))
+showPreview();
+
+};
+
+
+/* =========================
+   CATEGORY
+========================= */
+
+window.setCategory=function(category){
+
+selectedCategory=category;
+
+loadAds();
+
+};
+
+
+/* =========================
+   ADD AD
+========================= */
+
+window.addAd=async function(){
+
+if(!currentUser){
+
+alert("پہلے Login کریں۔");
+
+return;
+
+}
+
+const title=$("title").value.trim();
+const price=$("price").value;
+const city=$("city").value.trim();
+const category=$("category").value;
+const description=$("description").value.trim();
+const phone=$("phone").value.trim();
+const plan=$("plan").value;
+
+if(
+!title ||
+price==="" ||
+!city ||
+!description ||
+!phone
+){
+
+alert(
+"نام، قیمت، شہر، تفصیل اور نمبر لازمی ہیں۔"
+);
+
+return;
+
+}
+
+try{
+
+await addDoc(
+collection(db,"ads"),
+{
+
+title:title,
+
+price:Number(price),
+
+city:city,
+
+category:category,
+
+description:description,
+
+phone:phone,
+
+images:[...uploadedImages],
+
+userId:currentUser.uid,
+
+userEmail:
+currentUser.email||
+currentUser.phoneNumber||
+"",
+
+plan:plan,
+
+featured:
+plan==="featured",
+
+paymentStatus:"free",
+
+approved:true,
+
+rejected:false,
+
+sold:false,
+
+createdAt:
+serverTimestamp()
+
+}
+);
+
+alert("🎉 اشتہار Publish ہوگیا!");
+
+$("title").value="";
+$("price").value="";
+$("city").value="";
+$("description").value="";
+$("phone").value="";
+
+uploadedImages=[];
+
+$("preview").innerHTML="";
+
+$("uploadStatus")
+.classList.add("hidden");
+
+hideAdForm();
+
+loadAds();
+
+}catch(e){
+
+alert("❌ "+e.message);
+
+}
+
+};
+
+
+/* =========================
+   LOAD ADS
+========================= */
+
+window.loadAds=async function(){
+
+$("ads").innerHTML="لوڈ ہو رہا ہے...";
+
+try{
+
+const snapshot=
+await getDocs(
+collection(db,"ads")
+);
+
+const search=
+$("search").value
+.toLowerCase()
+.trim();
+
+let ads=[];
+
+snapshot.forEach(item=>{
+
+const ad=item.data();
+
+if(
+ad.approved===true &&
+ad.rejected!==true
+){
+
+const searchable=
+(
+(ad.title||"")+" "+
+(ad.city||"")+" "+
+(ad.category||"")+" "+
+(ad.description||"")
+)
+.toLowerCase();
+
+if(
+(!search || searchable.includes(search))
+&&
+(
+selectedCategory==="تمام"
+||
+ad.category===selectedCategory
+)
+){
+
+ads.push({
+id:item.id,
+...ad
+});
+
+}
+
+}
+
+});
+
+ads.sort(
+(a,b)=>
+Number(b.featured)-
+Number(a.featured)
+);
+
+if(!ads.length){
+
+$("ads").innerHTML=
+`
+<div class="card center">
+<h3>📭 ابھی کوئی اشتہار نہیں</h3>
+</div>
+`;
+
+return;
+
+}
+
+$("ads").innerHTML=
+ads.map(ad=>{
+
+const images=
+Array.isArray(ad.images)
+?ad.images
+:[];
+
+const mine=
+currentUser &&
+ad.userId===currentUser.uid;
+
+const whatsapp=
+makeWhatsApp(ad.phone);
+
+return `
+
+<div class="card
+${ad.featured?"featured":""}
+${ad.sold?"sold":""}">
+
+${
+ad.sold
+?
+`<span class="badge sold-badge">🔴 SOLD</span>`
+:
+ad.featured
+?
+`<span class="badge featured-badge">⭐ Featured</span>`
+:""
+}
+
+${
+images.length
+?
+`
+<div class="gallery">
+
+${images.map(
+img=>
+`<img src="${safe(img)}">`
+).join("")}
+
+</div>
+`
+:""
+}
+
+<h2>${safe(ad.title)}</h2>
+
+<div class="price">
+Rs. ${Number(ad.price||0).toLocaleString()}
+</div>
+
+<p>📍 ${safe(ad.city)}</p>
+
+<p>🗂️ ${safe(ad.category)}</p>
+
+<p>${safe(ad.description)}</p>
+
+<p class="small">
+📞 ${safe(ad.phone)}
+</p>
+
+<div class="row">
+
+<a href="tel:${safe(ad.phone)}">
+<button class="blue">📞 Call</button>
+</a>
+
+<a
+href="${whatsapp}"
+target="_blank"
+rel="noopener">
+
+<button class="green">💬 WhatsApp</button>
+
+</a>
+
+${
+currentUser &&
+!mine &&
+!ad.sold
+?
+`
+<button
+class="dark"
+onclick="openChat(
+'${ad.id}',
+'${safe(ad.userId)}',
+'${safe(ad.title)}'
+)">
+💬 Chat
+</button>
+`
+:""
+}
+
+${
+mine
+?
+`
+<button
+class="red"
+onclick="deleteMyAd('${ad.id}')">
+🗑️ Delete
+</button>
+
+<button
+class="${ad.sold?"green":"red"}"
+onclick="changeSold('${ad.id}',${!ad.sold})">
+${ad.sold?"🟢 Available":"🔴 Sold"}
+</button>
+`
+:""
+}
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+}catch(e){
+
+$("ads").innerHTML=
+`❌ ${safe(e.message)}`;
+
+}
+
+};
+
+
+/* =========================
+   WHATSAPP
+========================= */
+
+function makeWhatsApp(phone){
+
+let p=
+String(phone||"")
+.replace(/\D/g,"");
+
+if(p.startsWith("0"))
+p=p.substring(1);
+
+if(!p.startsWith("92"))
+p="92"+p;
+
+return "https://wa.me/"+p;
+
+}
+
+
+/* =========================
+   OWNER DELETE
+========================= */
+
+window.deleteMyAd=async function(id){
+
+const snap=
+await getDoc(
+doc(db,"ads",id)
+);
+
+if(
+!snap.exists() ||
+snap.data().userId!==currentUser.uid
+){
+
+alert("⛔ صرف مالک اپنا اشتہار delete کر سکتا ہے۔");
+
+return;
+
+}
+
+if(!confirm("اشتہار Delete کریں؟"))
 return;
 
 await deleteDoc(
 doc(db,"ads",id)
 );
 
-loadProfile();
-renderAds();
+loadAds();
 
 };
 
 
-window.markSold =
-async function(id){
+/* =========================
+   SOLD
+========================= */
+
+window.changeSold=async function(id,status){
+
+const snap=
+await getDoc(
+doc(db,"ads",id)
+);
+
+if(
+!snap.exists() ||
+snap.data().userId!==currentUser.uid
+)
+return;
 
 await updateDoc(
 doc(db,"ads",id),
 {
-sold:true
+sold:status
 }
 );
 
-loadProfile();
+loadAds();
 
 };
 
 
-/* =====================================
-   ADMIN CHECK
-===================================== */
+/* =========================
+   CHAT
+========================= */
 
-async function isAdmin(){
+window.openChat=async function(
+adId,
+sellerId,
+title
+){
 
 if(!currentUser)
-return false;
+return;
 
-if(
-currentUser.email === MAIN_ADMIN
-)
-return true;
+const chatId=
+[
+currentUser.uid,
+sellerId,
+adId
+]
+.sort()
+.join("_");
 
-const snap =
-await getDoc(
-doc(
+activeChat={
+id:chatId,
+sellerId:sellerId,
+adId:adId
+};
+
+await setDoc(
+doc(db,"chats",chatId),
+{
+
+participants:[
+currentUser.uid,
+sellerId
+],
+
+buyerId:
+currentUser.uid,
+
+sellerId:sellerId,
+
+adId:adId,
+
+updatedAt:
+serverTimestamp()
+
+},
+{
+merge:true
+}
+);
+
+$("chatTitle")
+.textContent=
+"💬 Chat — "+title;
+
+$("chatPanel")
+.classList
+.remove("hidden");
+
+if(chatUnsubscribe)
+chatUnsubscribe();
+
+chatUnsubscribe=
+onSnapshot(
+
+query(
+collection(
 db,
-"users",
-currentUser.uid
-)
-);
+"chats",
+chatId,
+"messages"
+),
+orderBy("createdAt","asc")
+),
 
-return (
-snap.exists()
-&&
-snap.data().role === "admin"
-);
+snap=>{
+
+$("chatMessages").innerHTML="";
+
+snap.forEach(item=>{
+
+const msg=item.data();
+
+$("chatMessages").innerHTML+=
+`
+<div class="message ${
+msg.senderId===currentUser.uid
+?"my-message"
+:"other-message"
+}">
+
+${safe(msg.text)}
+
+<div class="small">
+${safe(msg.senderEmail||"")}
+</div>
+
+</div>
+`;
+
+});
+
+$("chatMessages").scrollTop=
+$("chatMessages").scrollHeight;
 
 }
 
+);
 
-/* =====================================
-   ADMIN DASHBOARD
-===================================== */
+};
 
-async function loadAdmin(){
+
+/* =========================
+   SEND MESSAGE
+========================= */
+
+window.sendMessage=async function(){
+
+if(!currentUser||!activeChat)
+return;
+
+const text=
+$("chatInput").value.trim();
+
+if(!text)
+return;
+
+await addDoc(
+collection(
+db,
+"chats",
+activeChat.id,
+"messages"
+),
+{
+
+text:text,
+
+senderId:
+currentUser.uid,
+
+senderEmail:
+currentUser.email||
+currentUser.phoneNumber||
+"",
+
+createdAt:
+serverTimestamp()
+
+}
+);
+
+$("chatInput").value="";
+
+};
+
+
+/* =========================
+   CLOSE CHAT
+========================= */
+
+window.closeChat=function(){
+
+if(chatUnsubscribe){
+
+chatUnsubscribe();
+
+chatUnsubscribe=null;
+
+}
+
+activeChat=null;
+
+$("chatPanel")
+.classList
+.add("hidden");
+
+};
+
+
+/* =========================
+   ADMIN OPEN
+========================= */
+
+window.openAdmin=async function(){
 
 if(!await isAdmin()){
 
-alert("Admin access denied.");
-
-showPage("home");
+alert("⛔ Admin access denied");
 
 return;
+
 }
 
-const users =
+$("adminPanel")
+.classList
+.remove("hidden");
+
+loadAdmin();
+
+};
+
+
+/* =========================
+   ADMIN LOAD
+========================= */
+
+async function loadAdmin(){
+
+if(!await isAdmin())
+return;
+
+const snapshot=
 await getDocs(
-collection(db,"users")
+collection(db,"ads")
 );
 
-const ads =
-await getAds();
+let total=0;
+let featured=0;
+let sold=0;
 
-document.getElementById(
-"totalUsers"
-).textContent =
-users.size;
+let html="";
 
-document.getElementById(
-"totalAds"
-).textContent =
-ads.length;
+snapshot.forEach(item=>{
 
-document.getElementById(
-"pendingAds"
-).textContent =
-ads.filter(
-x=>x.approved!==true
-&&
-x.rejected!==true
-).length;
+const ad=item.data();
 
-document.getElementById(
-"paidAds"
-).textContent =
-ads.filter(
-x=>x.paymentStatus==="paid"
-).length;
+total++;
 
-document.getElementById(
-"adminAds"
-).innerHTML =
-ads.map(
-adminAdRow
-).join("");
+if(ad.featured)featured++;
+if(ad.sold)sold++;
 
-await loadAdmins();
-
-await loadSettings();
-
-}
-
-
-function adminAdRow(ad){
-
-return `
+html+=`
 
 <div class="card">
 
-<h3>
-${escapeHtml(ad.title)}
-</h3>
+<h3>${safe(ad.title)}</h3>
+
+<p>👤 ${safe(ad.userEmail||"")}</p>
+
+<p>📍 ${safe(ad.city||"")}</p>
+
+<p>💰 Rs. ${Number(ad.price||0).toLocaleString()}</p>
 
 <p>
-${escapeHtml(ad.city||"")}
+${ad.approved?"🟢 Approved":"🟠 Pending"}
 </p>
 
 <p>
-Rs. ${Number(ad.price||0).toLocaleString()}
+${ad.paymentStatus||"free"}
 </p>
 
-<span class="badge">
-${
-ad.approved
-? "Approved"
-: ad.rejected
-? "Rejected"
-: "Pending"
-}
-</span>
-
-<span class="badge">
-Payment:
-${escapeHtml(
-ad.paymentStatus||""
-)}
-</span>
-
-<br>
-
-<button class="btn green"
-onclick="approveAd('${ad.id}')">
+<button
+class="green"
+onclick="adminApprove('${item.id}')">
 ✅ Approve
 </button>
 
-<button class="btn orange"
-onclick="rejectAd('${ad.id}')">
+<button
+class="orange"
+onclick="adminReject('${item.id}')">
 ❌ Reject
 </button>
 
-<button class="btn blue"
-onclick="featureAd('${ad.id}')">
-⭐ Featured
+<button
+class="blue"
+onclick="adminFeature('${item.id}',${!!ad.featured})">
+⭐ ${ad.featured?"Remove Featured":"Featured"}
 </button>
 
-<button class="btn"
-onclick="markPaid('${ad.id}')">
+<button
+class="dark"
+onclick="adminPaid('${item.id}')">
 💰 Mark Paid
 </button>
 
-<button class="btn red"
-onclick="adminDeleteAd('${ad.id}')">
+<button
+class="red"
+onclick="adminDelete('${item.id}')">
 🗑️ Delete
 </button>
 
@@ -1733,11 +1857,30 @@ onclick="adminDeleteAd('${ad.id}')">
 
 `;
 
-}
+});
+
+$("adminStats").innerHTML=
+`
+<div class="stat">📊 Total: ${total}</div>
+<div class="stat">⭐ Featured: ${featured}</div>
+<div class="stat">🔴 Sold: ${sold}</div>
+`;
+
+$("adminAds").innerHTML=
+html||"کوئی اشتہار نہیں۔";
+
+loadAdmins();
+
+loadSettings();
+
+};
 
 
-window.approveAd =
-async function(id){
+/* =========================
+   ADMIN APPROVE
+========================= */
+
+window.adminApprove=async function(id){
 
 if(!await isAdmin())
 return;
@@ -1755,13 +1898,16 @@ serverTimestamp()
 );
 
 loadAdmin();
-renderAds();
+loadAds();
 
 };
 
 
-window.rejectAd =
-async function(id){
+/* =========================
+   ADMIN REJECT
+========================= */
+
+window.adminReject=async function(id){
 
 if(!await isAdmin())
 return;
@@ -1779,12 +1925,16 @@ serverTimestamp()
 );
 
 loadAdmin();
+loadAds();
 
 };
 
 
-window.featureAd =
-async function(id){
+/* =========================
+   FEATURE
+========================= */
+
+window.adminFeature=async function(id,current){
 
 if(!await isAdmin())
 return;
@@ -1792,18 +1942,22 @@ return;
 await updateDoc(
 doc(db,"ads",id),
 {
-featured:true,
-plan:"featured"
+featured:!current,
+plan:!current?"featured":"free"
 }
 );
 
 loadAdmin();
+loadAds();
 
 };
 
 
-window.markPaid =
-async function(id){
+/* =========================
+   PAYMENT
+========================= */
+
+window.adminPaid=async function(id){
 
 if(!await isAdmin())
 return;
@@ -1812,10 +1966,8 @@ await updateDoc(
 doc(db,"ads",id),
 {
 paymentStatus:"paid",
-paidAt:
-serverTimestamp(),
-paidBy:
-currentUser.email
+paidBy:currentUser.email,
+paidAt:serverTimestamp()
 }
 );
 
@@ -1824,15 +1976,16 @@ loadAdmin();
 };
 
 
-window.adminDeleteAd =
-async function(id){
+/* =========================
+   ADMIN DELETE
+========================= */
+
+window.adminDelete=async function(id){
 
 if(!await isAdmin())
 return;
 
-if(
-!confirm("Delete this advertisement?")
-)
+if(!confirm("یہ اشتہار Delete کریں؟"))
 return;
 
 await deleteDoc(
@@ -1840,47 +1993,46 @@ doc(db,"ads",id)
 );
 
 loadAdmin();
+loadAds();
 
 };
 
 
-/* =====================================
-   ADMIN MANAGEMENT
-===================================== */
+/* =========================
+   MAKE ADMIN
+========================= */
 
-window.makeAdmin =
-async function(){
+window.makeAdmin=async function(){
 
 if(
 !currentUser ||
-currentUser.email !== MAIN_ADMIN
+currentUser.email.toLowerCase()
+!==
+MAIN_ADMIN.toLowerCase()
 ){
 
-alert(
-"Only Main Admin can add Admin."
-);
+alert("صرف Main Admin دوسرے Admin بنا سکتا ہے۔");
 
 return;
 
 }
 
-const email =
-document.getElementById(
-"adminEmail"
-).value
+const email=
+$("adminEmail")
+.value
 .trim()
 .toLowerCase();
 
 if(!email)
 return;
 
-const q =
+const q=
 query(
 collection(db,"users"),
 where("email","==",email)
 );
 
-const snap =
+const snap=
 await getDocs(q);
 
 if(snap.empty){
@@ -1893,264 +2045,210 @@ return;
 
 }
 
-const userDoc =
-snap.docs[0];
-
 await updateDoc(
-doc(
-db,
-"users",
-userDoc.id
-),
+doc(db,"users",snap.docs[0].id),
 {
 role:"admin"
 }
 );
 
-alert("Admin added.");
+alert("✅ Admin بنا دیا گیا۔");
 
-document.getElementById(
-"adminEmail"
-).value="";
+$("adminEmail").value="";
 
 loadAdmins();
 
 };
 
 
-window.removeAdmin =
-async function(){
+/* =========================
+   REMOVE ADMIN
+========================= */
+
+window.removeAdmin=async function(){
 
 if(
 !currentUser ||
-currentUser.email !== MAIN_ADMIN
+currentUser.email.toLowerCase()
+!==
+MAIN_ADMIN.toLowerCase()
 ){
 
-alert(
-"Only Main Admin can remove Admin."
-);
+alert("صرف Main Admin یہ کام کر سکتا ہے۔");
 
 return;
 
 }
 
-const email =
-document.getElementById(
-"adminEmail"
-).value
+const email=
+$("adminEmail")
+.value
 .trim()
 .toLowerCase();
 
 if(
-email === MAIN_ADMIN.toLowerCase()
+email===MAIN_ADMIN.toLowerCase()
 ){
 
-alert(
-"Main Admin cannot be removed."
-);
+alert("Main Admin کو remove نہیں کیا جا سکتا۔");
 
 return;
 
 }
 
-const q =
+const q=
 query(
 collection(db,"users"),
 where("email","==",email)
 );
 
-const snap =
+const snap=
 await getDocs(q);
 
 if(snap.empty){
 
-alert("User not found.");
+alert("User نہیں ملا۔");
 
 return;
 
 }
 
 await updateDoc(
-doc(
-db,
-"users",
-snap.docs[0].id
-),
+doc(db,"users",snap.docs[0].id),
 {
 role:"user"
 }
 );
 
-alert("Admin removed.");
+alert("Admin remove ہوگیا۔");
 
 loadAdmins();
 
 };
 
 
+/* =========================
+   ADMIN LIST
+========================= */
+
 async function loadAdmins(){
 
-const snap =
+const snap=
 await getDocs(
 collection(db,"users")
 );
 
-const admins =
+const admins=
 snap.docs
-.map(d=>({
-id:d.id,
-...d.data()
-}))
+.map(d=>d.data())
 .filter(
 u=>
-u.role === "admin"
+u.role==="admin"
 ||
-u.email === MAIN_ADMIN
+(
+u.email &&
+u.email.toLowerCase()
+===
+MAIN_ADMIN.toLowerCase()
+)
 );
 
-document.getElementById(
-"adminList"
-).innerHTML = `
+$("adminList").innerHTML=
+`
+<h4>Current Admins</h4>
 
-<h3>Current Admins</h3>
-
-${admins.map(
-a=>`
-
-<p>
-🛡️
-${escapeHtml(a.email||"")}
 ${
-a.email === MAIN_ADMIN
-? "<b>(Main Admin)</b>"
-: ""
+admins.map(
+a=>
+`
+<p>
+🛡️ ${safe(a.email||a.phone||"")}
+${
+a.email &&
+a.email.toLowerCase()
+===
+MAIN_ADMIN.toLowerCase()
+?
+"<b>(Main Admin)</b>"
+:""
 }
 </p>
-
 `
-).join("")}
+).join("")
+}
 
 `;
 
 }
 
 
-/* =====================================
+/* =========================
    APP SETTINGS
-===================================== */
+========================= */
 
 async function loadSettings(){
 
-const ref =
-doc(
-db,
-"settings",
-"app"
+const snap=
+await getDoc(
+doc(db,"settings","app")
 );
-
-const snap =
-await getDoc(ref);
 
 if(!snap.exists())
 return;
 
-const data =
-snap.data();
+const data=snap.data();
 
-document.getElementById(
-"heroTitle"
-).textContent =
-data.title ||
-"Meena Bazaar 3F";
+if(data.title)
+document.querySelector("header h1")
+.textContent=data.title;
 
-document.getElementById(
-"heroSubtitle"
-).textContent =
-data.subtitle ||
-"Buy & Sell Everything Easily";
+if(data.subtitle)
+document.querySelector("header p")
+.textContent=data.subtitle;
 
 if(data.color){
 
-document.documentElement
-.style
-.setProperty(
-"--primary",
-data.color
-);
+document.querySelector("header")
+.style.background=
+`linear-gradient(135deg,${data.color},#1d4ed8)`;
 
 }
 
-if(data.banner){
+$("settingTitle").value=
+data.title||"";
 
-document.getElementById(
-"topBanner"
-).textContent =
-data.banner;
+$("settingSubtitle").value=
+data.subtitle||"";
 
-document.getElementById(
-"topBanner"
-).classList.remove(
-"hidden"
-);
+$("settingBanner").value=
+data.banner||"";
 
-}
-
-document.getElementById(
-"settingTitle"
-).value =
-data.title || "";
-
-document.getElementById(
-"settingSubtitle"
-).value =
-data.subtitle || "";
-
-document.getElementById(
-"settingBanner"
-).value =
-data.banner || "";
-
-document.getElementById(
-"settingColor"
-).value =
-data.color || "#0f766e";
+$("settingColor").value=
+data.color||"#2563eb";
 
 }
 
 
-window.saveSettings =
-async function(){
+/* =========================
+   SAVE SETTINGS
+========================= */
+
+window.saveSettings=async function(){
 
 if(!await isAdmin())
 return;
 
 await setDoc(
-doc(
-db,
-"settings",
-"app"
-),
+doc(db,"settings","app"),
 {
 
-title:
-document.getElementById(
-"settingTitle"
-).value,
+title:$("settingTitle").value,
 
-subtitle:
-document.getElementById(
-"settingSubtitle"
-).value,
+subtitle:$("settingSubtitle").value,
 
-banner:
-document.getElementById(
-"settingBanner"
-).value,
+banner:$("settingBanner").value,
 
-color:
-document.getElementById(
-"settingColor"
-).value
+color:$("settingColor").value
 
 },
 {
@@ -2158,214 +2256,48 @@ merge:true
 }
 );
 
-alert("Settings saved.");
+alert("✅ App settings محفوظ ہوگئیں۔");
 
 loadSettings();
 
 };
 
 
-window.savePaymentSettings =
-async function(){
+/* =========================
+   PAYMENT SETTINGS
+========================= */
+
+window.savePaymentSettings=async function(){
 
 if(!await isAdmin())
 return;
 
 await setDoc(
-doc(
-db,
-"settings",
-"payment"
-),
+doc(db,"settings","payment"),
 {
 
-method:
-document.getElementById(
-"paymentMethod"
-).value,
+method:$("paymentMethod").value,
 
-number:
-document.getElementById(
-"paymentNumber"
-).value
-
-}
-);
-
-alert("Payment settings saved.");
-
-};
-
-
-/* =====================================
-   CHAT
-===================================== */
-
-window.startChat =
-async function(sellerId,title){
-
-if(!currentUser){
-
-alert("Login required.");
-
-return;
-
-}
-
-const participants =
-[
-currentUser.uid,
-sellerId
-].sort();
-
-const chatId =
-participants.join("_");
-
-await setDoc(
-doc(db,"chats",chatId),
-{
-
-participants:participants,
-
-title:title,
+number:$("paymentNumber").value,
 
 updatedAt:
 serverTimestamp()
 
-},
-{
-merge:true
 }
 );
 
-currentChatId =
-chatId;
-
-showPage("chat");
-
-loadMessages();
+alert("✅ Payment settings محفوظ ہوگئیں۔");
 
 };
 
 
-async function loadMessages(){
-
-if(!currentChatId)
-return;
-
-const snap =
-await getDocs(
-collection(
-db,
-"chats",
-currentChatId,
-"messages"
-)
-);
-
-const messages =
-snap.docs
-.map(d=>({
-id:d.id,
-...d.data()
-}))
-.sort(
-(a,b)=>
-(a.createdAt?.seconds||0) -
-(b.createdAt?.seconds||0)
-);
-
-document.getElementById(
-"chatMessages"
-).innerHTML =
-messages.map(
-m=>
-`
-<div class="message ${
-m.senderId === currentUser.uid
-? "mine"
-: ""
-}">
-${escapeHtml(m.text||"")}
-</div>
-`
-).join("");
-
-}
-
-
-window.sendMessage =
-async function(){
-
-if(!currentUser ||
-!currentChatId)
-return;
-
-const text =
-document.getElementById(
-"chatInput"
-).value.trim();
-
-if(!text)
-return;
-
-await addDoc(
-collection(
-db,
-"chats",
-currentChatId,
-"messages"
-),
-{
-
-senderId:
-currentUser.uid,
-
-text:text,
-
-createdAt:
-serverTimestamp()
-
-}
-);
-
-document.getElementById(
-"chatInput"
-).value="";
-
-loadMessages();
-
-};
-
-
-/* =====================================
+/* =========================
    INITIAL
-===================================== */
+========================= */
 
-document.documentElement.dir =
-"rtl";
-
-showPage("home");
+loadAds();
 
 </script>
 
 </body>
-  </html>const firebaseConfig = {
-
-  apiKey: "PASTE_YOUR_API_KEY",
-
-  authDomain:
-  "PASTE_YOUR_PROJECT.firebaseapp.com",
-
-  projectId:
-  "PASTE_YOUR_PROJECT_ID",
-
-  storageBucket:
-  "PASTE_YOUR_STORAGE_BUCKET",
-
-  messagingSenderId:
-  "PASTE_YOUR_SENDER_ID",
-
-  appId:
-  "PASTE_YOUR_APP_ID"
-};
+</html>
